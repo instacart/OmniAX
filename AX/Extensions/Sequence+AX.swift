@@ -9,13 +9,13 @@
 import Foundation
 
 extension Sequence {
-    public func array() -> [Element] {
+    func array() -> [Iterator.Element] {
         return Array(self)
     }
 }
 
-extension Sequence where Element: Hashable {
-    public func set() -> Set<Element> {
+extension Sequence where Iterator.Element: Hashable {
+    func set() -> Set<Iterator.Element> {
         return Set(self)
     }
 }

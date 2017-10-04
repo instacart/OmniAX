@@ -9,17 +9,17 @@
 import Foundation
 
 extension String {
-    public var completeRange: NSRange {
+    var completeRange: NSRange {
         return NSRange(location: 0, length: characters.count)
     }
 
-    public var isBlank: Bool {
+    var isBlank: Bool {
         return trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 }
 
 extension Optional where Wrapped == String {
-    public var isBlank: Bool {
+    var isBlank: Bool {
         return self?.isBlank ?? true
     }
 }

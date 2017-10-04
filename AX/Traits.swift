@@ -25,6 +25,7 @@ public struct Traits: OptionSet {
     public static let startsMediaSession        = Traits(rawValue: UIAccessibilityTraitStartsMediaSession)
     public static let staticText                = Traits(rawValue: UIAccessibilityTraitStaticText)
     public static let summaryElement            = Traits(rawValue: UIAccessibilityTraitSummaryElement)
+    @available(iOS 10.0, *)
     public static let tabBar                    = Traits(rawValue: UIAccessibilityTraitTabBar)
     public static let updatesFrequently         = Traits(rawValue: UIAccessibilityTraitUpdatesFrequently)
 
