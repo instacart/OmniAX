@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Pass an array of Transforms to AX.configure(knownAbbreviations:transformers:) to utilize in AX.unabbreviate(string:)
 public typealias Transform = (String) -> String
 
 public protocol AbbrevationTransformer {
@@ -15,6 +16,13 @@ public protocol AbbrevationTransformer {
 }
 
 public extension Transformer {
+
+    /// Creates a regex find/replace Transform function for Transformer to understand.
+    ///
+    /// - Parameters:
+    ///   - pattern: regex pattern to match
+    ///   - value: replace with
+    /// - Returns: Transform function
     public static func replace(pattern: String, with value: String) -> Transform {
         return { string -> String in
             var correctedString = string
@@ -35,8 +43,8 @@ public struct Transformer: AbbrevationTransformer {
     // Keep init internal. AX users can create custom AbbreviationTransformer type
     init() {}
 
-    /// Uses regular expression to replace occurrences of known unit
-    /// abbrevations into their corresponding full words
+    /// Uses regular expression to replace occurrences of known abbrevations into their corresponding full words
+    /// Iterates through and performs all generalTransform functions passed in AX configuration
     public func unabbreviate(string: String?) -> String? {
         guard AX.voiceOverEnabled, var correctedString = string else {
             return string

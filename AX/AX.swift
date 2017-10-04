@@ -8,8 +8,7 @@
 
 import UIKit
 
-/// AX is a wrapper around UIAccessibility designed to
-/// ease the process of making in-app elements accessible to all users
+/// AX is a wrapper around UIAccessibility designed toease the process of making in-app elements accessible to all users
 public final class AX: NSObject {
     static let instance = AX()
 
@@ -27,10 +26,6 @@ public final class AX: NSObject {
         return AX.checkEnabled(features: .voiceOver)
     }
 
-    @objc public static var highContrastEnabled: Bool {
-        return AX.checkEnabled(features: .highContrast)
-    }
-
     private var transformer: AbbrevationTransformer {
         return customTransformer ?? _transformer
     }
@@ -41,54 +36,44 @@ public final class AX: NSObject {
 
     private var customTransformer: AbbrevationTransformer?
 
-    /// Don't allow outside initialization of this class.
-    /// Should be used through through it's static methods only
+    /// Don't allow outside initialization of this class. Should be used through through it's static methods only
     private override init() {
         super.init()
+
         // Check system enabled features
-        [.voiceOver, .reduceMotion, .highContrast].forEach({ checkSystemStatus(feature: $0) })
+        Features.all.forEach({ observe(feature: $0) })
 
         // Check for user forced defaults
         let forcedRawValue = UserDefaults.standard.integer(forKey: AX.defaultsForcedFeaturesKey)
         if forcedRawValue > 0 {
             userForceEnabledFeatures = Features(rawValue: UInt64(forcedRawValue))
         }
-
-        if #available(iOS 11.0, *) {
-            observe(notification: .UIAccessibilityVoiceOverStatusDidChange, onNext: { [weak self] _ in
-                self?.checkSystemStatus(feature: .voiceOver)
-            })
-        } else {
-            observe(notification: Foundation.Notification.Name(rawValue: UIAccessibilityVoiceOverStatusChanged), onNext: { [weak self] _ in
-                self?.checkSystemStatus(feature: .voiceOver)
-            })
-        }
-
-        observe(notification: .UIAccessibilityReduceMotionStatusDidChange, onNext: { [weak self] _ in
-            self?.checkSystemStatus(feature: .reduceMotion)
-        })
-
-        observe(notification: .UIAccessibilityDarkerSystemColorsStatusDidChange, onNext: { [weak self] _ in
-            self?.checkSystemStatus(feature: .highContrast)
-        })
     }
 
     // MARK: - Configuration
 
+    /// Configures AX with a custom abbreviation transformer
     public static func configure(customTransformer: AbbrevationTransformer) {
         AX.instance.customTransformer = customTransformer
     }
 
-    public static func configure(transforms: [Transform]) {
+    /// Configures default AbbreviationTransformer
+    ///
+    /// - Parameters:
+    ///   - knownAbbreviations: Optional dictionary of knownAbbreviations. Modified if non-nil
+    ///   - transforms: Optional array of general transforms to be performed on AX.unabbreviate(string:). Modified if non-nil
+    /// - Returns: true if transformer is not custom and was configured
+    @discardableResult public static func configure(knownAbbreviations: [String: String]?, transforms: [Transform]?) -> Bool {
         if var transformer = AX.instance.transformer as? Transformer {
-            transformer.generalTransforms = transforms
+            if let knownAbbreviations = knownAbbreviations {
+                transformer.knownAbbreviations = knownAbbreviations
+            }
+            if let transforms = transforms {
+                transformer.generalTransforms = transforms
+            }
+            return true
         }
-    }
-
-    public static func configure(knownAbbreviations: [String: String]) {
-        if var transformer = AX.instance.transformer as? Transformer {
-            transformer.knownAbbreviations = knownAbbreviations
-        }
+        return false
     }
 
     // MARK: - Private
@@ -104,7 +89,10 @@ public final class AX: NSObject {
 
     /// Performs a system check for enabled/disabled status of the included feature
     private func checkSystemStatus(feature: Features) {
-        if feature.systemCheckEnabled == true {
+        guard let enabled = feature.systemCheckEnabled else {
+            return assertionFailure("Unknown/Unmapped feature")
+        }
+        if enabled {
             systemEnabledFeatures.insert(feature)
         } else {
             systemEnabledFeatures.remove(feature)
@@ -116,17 +104,24 @@ public final class AX: NSObject {
         UserDefaults.standard.synchronize()
     }
 
-    private func observe(notification name: Foundation.Notification.Name, onNext: @escaping (Foundation.Notification) -> Void) {
-        NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: onNext)
+    private func observe(feature: Features) {
+        // Intial check for enabled
+        checkSystemStatus(feature: feature)
+
+        // Observe
+        if let notification = feature.statusChangedNotification {
+            notification.observe(onNext: { [weak self] _ in self?.checkSystemStatus(feature: feature) })
+        } else {
+            assertionFailure("Unmapped/Unknown feature")
+        }
     }
 
     // MARK: - Public
 
-    /// Adds custom actions to an element to allow for custom gestures and interaction with an element
+    /// Add custom actions to an element to allow for custom gestures and interaction with an element
     ///
     /// - Parameters:
-    ///   - append: Controls whether included actions will update by appending
-    ///     (or updating a matching existing action) or if array will supplant current actions altogether
+    ///   - replace: Controls whether included actions will replace or append the included actions
     @objc public static func add(customActions: [UIAccessibilityCustomAction], to element: NSObject?, replace: Bool = false) {
         guard let element = element else {
             return
@@ -146,7 +141,7 @@ public final class AX: NSObject {
     }
 
     /// Adds or removes the included traits to/from the element
-    /// Forces isAccessibilityElement value if flag included (otherwise untouched)
+    /// Modify isAccessibilityElement value if force flag is non-nil
     public static func set(traits: Traits, enabled: Bool = true, for element: NSObject?, forceAccessible flag: Bool? = nil) {
         guard let element = element else {
             return
@@ -169,7 +164,7 @@ public final class AX: NSObject {
 
     // MARK: - Features
 
-    /// Adds included AX features as forced options.
+    /// Adds included AX features as forced options. (Example: in-app settings)
     /// checkEnabled(features:) will now return true for included features
     /// Note: - Will NOT enable UIAccessibility features. This is for your custom handling only
     public static func addForced(features: Features) {
@@ -205,7 +200,7 @@ public final class AX: NSObject {
         UIAccessibilityPostNotification(notification.mappedValue, focus)
     }
 
-    /// Post an accessibility announcement notification, reading the included message
+    /// Convenience: Post an accessibility announcement notification, reading the included message
     public static func announce(message: String?) {
         guard let message = message else {
             return
@@ -214,24 +209,31 @@ public final class AX: NSObject {
         post(notification: .announcement, focus: message)
     }
 
-    /// Post an accessibility announcement notification, reading the included preset message
+    /// Convenience: Post an accessibility announcement notification, reading the included preset message
     public static func announce(message: Message) {
         announce(message: message)
     }
 
     // MARK: - Summaries
 
-    /// Summarize the accessibilityLabels from subElements into a parent element.
+    /// Summarize the accessibilityLabels from sub-elements into a parent element
     /// Useful for combining subviews into a more digestible accessibilty element
-    /// Inherits the subElements' traits by default
-    public static func summarize(subElements: [NSObject?], in element: NSObject?, inheritTraits: Bool = true, excludeHidden: Bool = true) {
+    ///
+    /// - Parameters:
+    ///   - elements: Elements to summarize
+    ///   - element: Element to act as parent. If UIView and no custom frame passed, accessibilityFrame will be view's frame
+    ///   - inheritTraits: Inherits the subElements' traits by default
+    ///   - excludeHidden: Hidden UIView elements are excluded from summary by default
+    ///   - frame: If non-nil, the accessibilyFrame of the parent element is set to this value. Will need to handle scrolling manually
+    public static func summarize(elements: [NSObject?], in element: NSObject?, inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
         guard voiceOverEnabled else {
             return
         }
         guard let element = element else {
             return
         }
-        let accessibilityText = subElements
+
+        let accessibilityText = elements
             .flatMap({
                 $0?.isAccessibilityElement = ($0 === element)
                 if excludeHidden, let view = $0 as? UIView {
@@ -244,10 +246,15 @@ public final class AX: NSObject {
             .joined(separator: ", ")
 
         element.accessibilityLabel = accessibilityText
+
+        if let frame = frame {
+            element.accessibilityFrame = frame
+        }
+
         element.isAccessibilityElement = !accessibilityText.isBlank
 
         if inheritTraits {
-            subElements
+            elements
                 .flatMap({
                     guard excludeHidden, let view = $0 as? UIView else {
                         return $0?.accessibilityTraits
@@ -258,20 +265,18 @@ public final class AX: NSObject {
         }
     }
 
-    /// Summarize the accessibilityLabels from subElements into a parent element.
-    /// Useful for combining subviews into a more digestible accessibilty element
-    /// Inherits the subElements' traits by default
     /// Objective-C available overload of method by the same name
-    @objc public static func summarize(subElements: [NSObject], in element: NSObject?, inheritTraits: Bool = true, excludeHidden: Bool = true) {
-        summarize(subElements: subElements as [NSObject?], in: element, inheritTraits: inheritTraits, excludeHidden: excludeHidden)
+    @objc public static func summarize(elements: [NSObject], in element: NSObject?, inheritTraits: Bool = true, excludeHidden: Bool = true) {
+        summarize(elements: elements as [NSObject?], in: element, inheritTraits: inheritTraits, excludeHidden: excludeHidden)
     }
 
-    /// Uses regular expression to replace occurrences of known unit
-    /// abbrevations into their corresponding full words
+    /// Replace occurrences of known abbrevations into their corresponding full words
+    /// Uses built in Transformer by default. Configurable.
     @objc public static func unabbreviate(string: String?) -> String? {
         return AX.instance.transformer.unabbreviate(string: string)
     }
 
+    /// Bool inidicating if the element the focused accessibilityElement
     public static func isFocused(element: NSObject?) -> Bool {
         guard voiceOverEnabled else {
             return false
