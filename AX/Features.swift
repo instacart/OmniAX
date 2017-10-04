@@ -11,6 +11,7 @@ import Foundation
 public struct Features: OptionSet {
     public let rawValue: UInt64
 
+    @available(iOS 10.0, *)
     public static let assistiveTouch        = Features(rawValue: 1 << 0)
     public static let boldText              = Features(rawValue: 1 << 1)
     public static let closedCaptioning      = Features(rawValue: 1 << 2)
@@ -32,7 +33,7 @@ public struct Features: OptionSet {
     }
 
     var systemCheckEnabled: Bool? {
-        if self == .assistiveTouch {
+        if #available(iOS 10.0, *), self == .assistiveTouch {
             return UIAccessibilityIsAssistiveTouchRunning()
         } else if self == .boldText {
             return UIAccessibilityIsBoldTextEnabled()
@@ -67,7 +68,7 @@ public struct Features: OptionSet {
     }
 
     var statusChangedNotification: Foundation.Notification.Name? {
-        if self == .assistiveTouch {
+        if #available(iOS 10.0, *), self == .assistiveTouch {
             return .UIAccessibilityAssistiveTouchStatusDidChange
         } else if self == .boldText {
             return .UIAccessibilityBoldTextStatusDidChange
@@ -106,26 +107,41 @@ public struct Features: OptionSet {
     }
 
     // FIXME: - Perhaps utilize this technique instead of manual array: https://forums.developer.apple.com/thread/16252
-    static var all: [Features] = [
-        .assistiveTouch,
-        .boldText,
-        .closedCaptioning,
-        .darkerSystemColors,
-        .grayscale,
-        .guidedAccess,
-        .invertColors,
-        .monoAudio,
-        .reduceMotion,
-        .reduceTransparency,
-        .shakeToUndo,
-        .speakScreen,
-        .speakSelection,
-        .switchControl,
-        .voiceOver
-    ]
+    static var all: [Features] = {
+        var features: [Features] = [
+            .boldText,
+            .closedCaptioning,
+            .darkerSystemColors,
+            .grayscale,
+            .guidedAccess,
+            .invertColors,
+            .monoAudio,
+            .reduceMotion,
+            .reduceTransparency,
+            .shakeToUndo,
+            .speakScreen,
+            .speakSelection,
+            .switchControl,
+            .voiceOver
+        ]
+        if #available(iOS 10.0, *) {
+            features.append(.assistiveTouch)
+        }
+        return features
+    }()
 
     public enum EnabledCheckType {
         case any
         case all
     }
 }
+
+//    Create your own helper checks by extending AX
+//
+//    extension AX {
+//        @objc public static var highContrastEnabled: Bool {
+//            return AX.checkEnabled(features: [.darkerSystemColors, .reduceTransparency], checkType: .any)
+//        }
+//    }
+//
+

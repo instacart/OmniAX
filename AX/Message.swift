@@ -18,9 +18,9 @@ public struct Message {
     }
 }
 
-// To create your own custom messages, simply extend Message like the example below. Unlike above, in extensions, these must be declared: `public static var`
+// To create your own custom messages, simply extend Message like the example below.
 //
 //  public extension Message {
-//      public static var customMessage = Message(rawValue: "Custom message here")
+//      public static let customMessage = Message(rawValue: "Custom message here")
 //  }
 //

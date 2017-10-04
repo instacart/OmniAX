@@ -179,12 +179,13 @@ public final class AX: NSObject {
     }
 
     /// Check to see if user's in-app settings have force enabled the included AX Features
+    /// Defaults to check if ALL features enabled
     public static func checkForceEnabled(features: Features, checkType: Features.EnabledCheckType = .all) -> Bool {
         return checkEnabled(features: features, checkType: checkType, within: AX.instance.userForceEnabledFeatures)
     }
 
     /// Returns Bool value indication if the included features are enabled
-    /// Check performed based on the comparison type provided
+    /// Defaults to check if *ALL* features are enabled
     public static func checkEnabled(features: Features, checkType: Features.EnabledCheckType = .all) -> Bool {
         return checkEnabled(features: features, checkType: checkType, within: AX.instance.enabledFeatures)
     }
