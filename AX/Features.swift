@@ -97,6 +97,7 @@ public struct Features: OptionSet {
         } else if self == .switchControl {
             return .UIAccessibilitySwitchControlStatusDidChange
         } else if self == .voiceOver {
+// NOTE: - Compilation issue even with #available() check. Commenting until bump up of deployment target
 //            if #available(iOS 11.0, *) {
 //                return .UIAccessibilityVoiceOverStatusDidChange
 //            } else {
@@ -106,7 +107,7 @@ public struct Features: OptionSet {
         return nil
     }
 
-    // FIXME: - Perhaps utilize this technique instead of manual array: https://forums.developer.apple.com/thread/16252
+    // NOTE: - Perhaps utilize this technique instead of manual array: https://forums.developer.apple.com/thread/16252
     static var all: [Features] = {
         var features: [Features] = [
             .boldText,
