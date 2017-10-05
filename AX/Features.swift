@@ -97,11 +97,11 @@ public struct Features: OptionSet {
         } else if self == .switchControl {
             return .UIAccessibilitySwitchControlStatusDidChange
         } else if self == .voiceOver {
-            if #available(iOS 11.0, *) {
-                return .UIAccessibilityVoiceOverStatusDidChange
-            } else {
+//            if #available(iOS 11.0, *) {
+//                return .UIAccessibilityVoiceOverStatusDidChange
+//            } else {
                 return .init(rawValue: UIAccessibilityVoiceOverStatusChanged)
-            }
+//            }
         }
         return nil
     }
