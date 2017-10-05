@@ -136,13 +136,13 @@ public final class AX: NSObject {
     }
 
     /// Adds/removes the same set of traits to all included elements
-    public static func set(traits: Traits, enabled: Bool = true, for elements: [NSObject?], forceAccessible flag: Bool? = nil) {
-        elements.forEach({ set(traits: traits, enabled: enabled, for: $0, forceAccessible: flag) })
+    public static func toggle(traits: Traits, enabled: Bool = true, for elements: [NSObject?], forceAccessible flag: Bool? = nil) {
+        elements.forEach({ toggle(traits: traits, enabled: enabled, for: $0, forceAccessible: flag) })
     }
 
     /// Adds or removes the included traits to/from the element
     /// Modify isAccessibilityElement value if force flag is non-nil
-    public static func set(traits: Traits, enabled: Bool = true, for element: NSObject?, forceAccessible flag: Bool? = nil) {
+    public static func toggle(traits: Traits, enabled: Bool = true, for element: NSObject?, forceAccessible flag: Bool? = nil) {
         guard let element = element else {
             return
         }
