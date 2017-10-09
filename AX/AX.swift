@@ -71,6 +71,7 @@ public final class AX: NSObject {
             if let transforms = transforms {
                 transformer.generalTransforms = transforms
             }
+            AX.instance._transformer = transformer
             return true
         }
         return false
