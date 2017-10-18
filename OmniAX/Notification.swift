@@ -6,6 +6,8 @@
 //  Copyright © 2017 Dan Loman. All rights reserved.
 //
 
+import UIKit
+
 public enum Notification {
     case announcement
     case layoutChanged

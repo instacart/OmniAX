@@ -6,7 +6,7 @@
 //  Copyright © 2017 Dan Loman. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public struct Features: OptionSet {
     public let rawValue: UInt64

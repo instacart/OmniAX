@@ -6,6 +6,8 @@
 //  Copyright © 2017 Dan Loman. All rights reserved.
 //
 
+import Foundation
+
 public struct Message {
     let rawValue: String
 

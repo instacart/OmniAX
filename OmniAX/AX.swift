@@ -8,11 +8,11 @@
 
 import UIKit
 
-/// AX is a wrapper around UIAccessibility designed toease the process of making in-app elements accessible to all users
+/// AX is a wrapper around UIAccessibility designed to ease the process of making in-app elements accessible to all users
 public final class AX: NSObject {
     static let instance = AX()
 
-    private static let defaultsForcedFeaturesKey = "AX.userForceEnabledFeatures"
+    private static let defaultsForcedFeaturesKey = "com.OmniAX.userForceEnabledFeatures"
 
     private var systemEnabledFeatures: Features = []
 
