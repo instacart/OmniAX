@@ -1,12 +1,10 @@
 //
 //  AX.swift
-//  AX
+//  OmniAX
 //
 //  Created by Dan Loman on 10/3/17.
 //  Copyright © 2017 Dan Loman. All rights reserved.
 //
-
-import UIKit
 
 /// AX is a wrapper around UIAccessibility designed to ease the process of making in-app elements accessible to all users
 public final class AX: NSObject {
