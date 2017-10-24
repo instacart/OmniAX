@@ -10,15 +10,17 @@ import Foundation
 
 extension UIFont {
     public func scaled(style: UIFontTextStyle = .headline) -> UIFont {
+        let size = fontDescriptor.fontAttributes[UIFontDescriptorSizeAttribute] as? CGFloat ?? pointSize
+
         let attributes: [String: Any] = [
-            UIFontDescriptorSizeAttribute: scaled(fontSize: pointSize, style: .headline)
+            UIFontDescriptorSizeAttribute: scaled(fontSize: size, style: .headline)
         ]
 
         return UIFont(descriptor: fontDescriptor.addingAttributes(attributes), size: 0)
     }
 
     // Default to headline style to prevent massive sizes from making unoptimized apps unusable
-    func scaled(fontSize: CGFloat, style: UIFontTextStyle = .headline) -> CGFloat {
+    private func scaled(fontSize: CGFloat, style: UIFontTextStyle = .headline) -> CGFloat {
         let systemSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: style).pointSize
 
         guard systemSize != style.defaultSize else {
@@ -60,3 +62,16 @@ private extension UIFontTextStyle {
         }
     }
 }
+
+//  Example:
+//
+//  extension UIFont {
+//      static func customFont(size: CGFloat) -> UIFont {
+//          return UIFont(name: "yourCustomFontName", size: size)!.scaled()
+//      }
+//  }
+//
+//  struct Example {
+//      let font: UIFont = .customFont(size: 14)
+//  }
+//
