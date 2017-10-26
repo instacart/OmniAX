@@ -21,7 +21,7 @@
 		22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F781F8459CD00D3BDA9 /* AX.swift */; };
 		22AB4F811F8459CD00D3BDA9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F791F8459CD00D3BDA9 /* Message.swift */; };
 		22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */; };
-		22C28EB01FA002C0007E104B /* Dictation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28EAF1FA002C0007E104B /* Dictation.swift */; };
+		22C28EB01FA002C0007E104B /* DictationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28EAF1FA002C0007E104B /* DictationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		22AB4F781F8459CD00D3BDA9 /* AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AX.swift; sourceTree = "<group>"; };
 		22AB4F791F8459CD00D3BDA9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationTransformer.swift; sourceTree = "<group>"; };
-		22C28EAF1FA002C0007E104B /* Dictation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictation.swift; sourceTree = "<group>"; };
+		22C28EAF1FA002C0007E104B /* DictationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 				22AB4F781F8459CD00D3BDA9 /* AX.swift */,
 				22AB4F731F8459CD00D3BDA9 /* Extensions */,
 				22AB4F761F8459CD00D3BDA9 /* Features.swift */,
-				22C28EAF1FA002C0007E104B /* Dictation.swift */,
+				225239811FA289B5008EBD12 /* DictationView */,
 				22AB4F791F8459CD00D3BDA9 /* Message.swift */,
 				22AB4F721F8459CD00D3BDA9 /* Notification.swift */,
 				22AB4F771F8459CD00D3BDA9 /* Traits.swift */,
@@ -114,6 +114,7 @@
 				22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */,
 				22AB4F751F8459CD00D3BDA9 /* String+AX.swift */,
 				22689B4A1F853FB50044A8CE /* Notification+AX.swift */,
+				225239881FA28B27008EBD12 /* UIView+AX.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -188,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2252398D1FA29D35008EBD12 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225239801FA288FF008EBD12 /* Autolayout.swift in Sources */,
 				22AB4F7E1F8459CD00D3BDA9 /* Features.swift in Sources */,
 				221E37471FAE1D24005F0E13 /* AXCompatible+UIView.swift in Sources */,
 				22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */,
@@ -205,12 +208,14 @@
 				221E37491FAE1D69005F0E13 /* AXCompatible+NSObject.swift in Sources */,
 				221E37451FAE1CDD005F0E13 /* AXCompatible+Text.swift in Sources */,
 				22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */,
+				225239871FA28AD3008EBD12 /* DictationView.swift in Sources */,
 				22AB4F7D1F8459CD00D3BDA9 /* String+AX.swift in Sources */,
 				22AB4F7F1F8459CD00D3BDA9 /* Traits.swift in Sources */,
 				22689B4B1F853FB50044A8CE /* Notification+AX.swift in Sources */,
 				22AB4F7C1F8459CD00D3BDA9 /* Sequence+AX.swift in Sources */,
 				221E37421FAE13E3005F0E13 /* AXCompatible.swift in Sources */,
 				22AB4F811F8459CD00D3BDA9 /* Message.swift in Sources */,
+				225239851FA28A9D008EBD12 /* Output.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
