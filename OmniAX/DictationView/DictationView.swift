@@ -10,16 +10,16 @@ import UIKit
 
 final class DictationView: UIView {
     let dictateButton: UIButton = ._init() {
-        let icon: UIImage = #imageLiteral(resourceName: "microphone")
-        $0.setImage(icon, for: .normal)
+//        $0.setTitle("microphone", for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "IconMicrophone"), for: .normal)
         $0.accessibilityLabel = NSLocalizedString("Dictate", comment: "")
         $0.accessibilityHint = NSLocalizedString("Press to dictate", comment: "")
     }
 
     public weak var output: DictationOutput?
 
-    init() {
-        super.init(frame: .zero)
+    override init(frame: CGRect = .zero) {
+        super.init(frame: frame)
 
         addSubview(dictateButton)
 
@@ -47,7 +47,7 @@ final class DictationView: UIView {
 
 @available(iOSApplicationExtension 10.0, *)
 extension AX {
-    static var dictationViewController: DictationViewController = .init()
+    static let dictationViewController: DictationViewController = .init()
 
     public static var dictationInputAccessoryView: UIView {
         return dictationViewController.view
