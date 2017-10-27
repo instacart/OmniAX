@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>&quot;For dictation purposes, this app needs access to your device&apos;s microphone.&quot;</string>
+	<string>For dictation purposes, this app needs access to your device&apos;s microphone.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>&quot;Your voice will be used for dictation to accessibility elements where system-provided dictation is unavailable&quot;</string>
+	<string>Your voice will be used for dictation to accessibility elements where system-provided dictation is unavailable</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

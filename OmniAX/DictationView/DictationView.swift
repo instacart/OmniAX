@@ -10,18 +10,27 @@ import UIKit
 
 final class DictationView: UIView {
     let dictateButton: UIButton = ._init() {
-//        $0.setTitle("microphone", for: .normal)
-        $0.setImage(#imageLiteral(resourceName: "IconMicrophone"), for: .normal)
+        let icon: UIImage = .imageFromLiteral(#imageLiteral(resourceName: "IconMicrophone"))
+        $0.setImage(icon, for: .normal)
+        $0.setImage(icon.with(color: .lightGray), for: .highlighted)
         $0.accessibilityLabel = NSLocalizedString("Dictate", comment: "")
         $0.accessibilityHint = NSLocalizedString("Press to dictate", comment: "")
     }
 
-    public weak var output: DictationOutput?
+    weak var delegate: DictationDelegate?
+
+    private lazy var borderLayer: CALayer = {
+        let layer = CALayer()
+        layer.backgroundColor = UIColor.gray.cgColor
+        return layer
+    }()
 
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
 
         addSubview(dictateButton)
+
+        layer.addSublayer(borderLayer)
 
         setupConstraints()
     }
@@ -36,12 +45,18 @@ final class DictationView: UIView {
 
             $0.pin(\.centerXAnchor)
                 .pin(\.centerYAnchor, to: self)
-                .set(\.heightAnchor)
+                .set(\.heightAnchor, to: widthHeight)
                 .set(\.widthAnchor, to: widthHeight)
         }
     }
 
     func show(loading: Bool) {
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        borderLayer.frame = CGRect(origin: bounds.origin, size: CGSize(width: bounds.width, height: .pixel))
     }
 }
 
@@ -50,6 +65,16 @@ extension AX {
     static let dictationViewController: DictationViewController = .init()
 
     public static var dictationInputAccessoryView: UIView {
+        dictationViewController.view.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 60))
         return dictationViewController.view
+    }
+
+    public static var dictationDelegate: DictationDelegate? {
+        get {
+            return dictationViewController.dictationView.delegate
+        }
+        set {
+            dictationViewController.dictationView.delegate = newValue
+        }
     }
 }

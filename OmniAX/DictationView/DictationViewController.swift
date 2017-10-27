@@ -22,7 +22,7 @@ extension Output where A == String {
     }
 }
 
-public protocol DictationOutput: class {
+public protocol DictationDelegate: class {
     func dispatch(result: Output<String>)
 }
 
@@ -32,8 +32,8 @@ final class DictationViewController: UIViewController {
         $0.dictateButton.addTarget(self, action: #selector(didTapDictate(sender:)), for: .touchUpInside)
     }
 
-    private weak var output: DictationOutput? {
-        return dictationView.output
+    private weak var delegate: DictationDelegate? {
+        return dictationView.delegate
     }
 
     private lazy var dictationManager: DictationManager = {
@@ -54,11 +54,36 @@ final class DictationViewController: UIViewController {
             case .success:
                 self?.dictationView.show(loading: false)
             }
-            self?.output?.dispatch(result: $0)
+            self?.delegate?.dispatch(result: $0)
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        checkAccess()
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        dictationView.frame = view.frame
+    }
+
     @objc private func didTapDictate(sender: UIButton) {
-        dictationManager.beginDictation()
+        dictationManager.toggleDictation()
+    }
+
+    private func checkAccess() {
+        let status = SFSpeechRecognizer.authorizationStatus()
+        guard status == .notDetermined else {
+            return dictationView.dictateButton.isEnabled = status == .authorized
+        }
+
+        SFSpeechRecognizer.requestAuthorization { state in
+            OperationQueue.main.addOperation { [weak self] in
+                self?.dictationView.dictateButton.isEnabled = state == .authorized
+            }
+        }
     }
 }
