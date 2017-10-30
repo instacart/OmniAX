@@ -70,7 +70,7 @@ final class DictationManager {
     }
 
     private func setupAudioNode() throws -> SFSpeechAudioBufferRecognitionRequest? {
-        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement, options: [])
+        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement, options: .allowBluetoothA2DP)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
 
         guard let node = audioEngine.inputNode else {
