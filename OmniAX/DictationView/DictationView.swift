@@ -25,12 +25,24 @@ final class DictationView: UIView {
         return layer
     }()
 
+    private lazy var loadingLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.strokeColor = UIColor.black.cgColor
+        layer.fillColor = UIColor.clear.cgColor
+        layer.lineWidth = 2
+        layer.strokeEnd = 0
+        return layer
+    }()
+
+    private static let buttonWidthHeight: CGFloat = 50
+
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
 
         addSubview(dictateButton)
 
         layer.addSublayer(borderLayer)
+        layer.addSublayer(loadingLayer)
 
         setupConstraints()
     }
@@ -41,7 +53,7 @@ final class DictationView: UIView {
 
     private func setupConstraints() {
         dictateButton.constrain() {
-            let widthHeight: CGFloat = 50
+            let widthHeight = DictationView.buttonWidthHeight
 
             $0.pin(\.centerXAnchor)
                 .pin(\.centerYAnchor, to: self)
@@ -51,16 +63,44 @@ final class DictationView: UIView {
     }
 
     func show(loading: Bool) {
+        if loading {
+            let start = CABasicAnimation(keyPath: "strokeStart")
+            start.toValue = 1
+            start.duration = 1
+            start.beginTime = 0.25
+            start.fillMode = kCAFillModeForwards
+            start.timingFunction = .init(name: kCAMediaTimingFunctionEaseInEaseOut)
+
+            let end = CABasicAnimation(keyPath: "strokeEnd")
+            end.toValue = 1
+            end.duration = 1
+            end.fillMode = kCAFillModeForwards
+
+            let group = CAAnimationGroup()
+            group.animations = [start, end]
+            group.duration = 1.5
+
+            group.repeatCount = .infinity
+
+            loadingLayer.add(group, forKey: nil)
+        } else {
+            loadingLayer.removeAllAnimations()
+        }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
         borderLayer.frame = CGRect(origin: bounds.origin, size: CGSize(width: bounds.width, height: .pixel))
+
+        // Loading layer layout
+        let twoPi: CGFloat = 2 * .pi
+        let startAngle: CGFloat = -0.25 * twoPi
+        loadingLayer.path = UIBezierPath(arcCenter: center, radius: dictateButton.frame.size.height / 2, startAngle: startAngle, endAngle: startAngle + twoPi, clockwise: true).cgPath
     }
 }
 
-@available(iOSApplicationExtension 10.0, *)
+@available(iOS 10.0, *)
 extension AX {
     static let dictationViewController: DictationViewController = .init()
 

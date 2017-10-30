@@ -101,6 +101,8 @@ final class Constrainer {
             constraint = view[keyPath: p].constraint(equalTo: to[keyPath: p])
         } else if let p = path as? KeyPath<UIView, NSLayoutDimension> {
             constraint = view[keyPath: p].constraint(equalTo: to[keyPath: p])
+        } else {
+            assertionFailure("Unsupported keyPath constraint")
         }
 
         if let constraint = constraint {

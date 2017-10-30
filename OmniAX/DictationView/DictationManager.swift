@@ -7,6 +7,7 @@
 //
 
 import Speech
+import AudioToolbox
 
 @available(iOS 10.0, *)
 final class DictationManager {
@@ -18,6 +19,7 @@ final class DictationManager {
     private weak var timer: Timer?
 
     private let nodeBus: AVAudioNodeBus = 0
+    private let audioSession = AVAudioSession.sharedInstance()
 
     var output: OutputHandler<String>?
 
@@ -26,8 +28,12 @@ final class DictationManager {
             stopRecording()
             return
         }
+
         output?(.loading(true))
+
         do {
+            AudioPlayer.play(sound: .startRecording)
+
             guard let request = try setupAudioNode() else {
                 return
             }
@@ -40,12 +46,16 @@ final class DictationManager {
             guard let output = output else {
                 return
             }
+
             resetAutostopTimer()
+
             recognitionTask = speechRecognizer.recognitionTask(with: request, resultHandler: { [weak self] result, error in
                 if let result = result {
-                    output(.success(result.bestTranscription.formattedString))
+                    let resultString = result.bestTranscription.formattedString
+                    output(.success(resultString))
                     if result.isFinal {
                         self?.stopRecording()
+                        AX.post(notification: .announcement, focus: String.localizedStringWithFormat("Dictate. Entered: %@", resultString))
                     } else {
                         self?.resetAutostopTimer()
                     }
@@ -60,10 +70,7 @@ final class DictationManager {
     }
 
     private func setupAudioNode() throws -> SFSpeechAudioBufferRecognitionRequest? {
-        let audioSession = AVAudioSession.sharedInstance()
-
-        try audioSession.setCategory(AVAudioSessionCategoryRecord)
-        try audioSession.setMode(AVAudioSessionModeMeasurement)
+        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement, options: [])
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
 
         guard let node = audioEngine.inputNode else {
@@ -86,20 +93,25 @@ final class DictationManager {
     }
 
     private func stopRecording() {
-        audioEngine.stop()
-        if let node = audioEngine.inputNode {
-            node.removeTap(onBus: nodeBus)
+        guard audioEngine.isRunning else {
+            return
         }
+        audioEngine.stop()
+        audioEngine.inputNode?.removeTap(onBus: nodeBus)
+
         recognitionTask?.cancel()
         recognitionTask = nil
         resetAutostopTimer(newTimer: false)
+
+        AudioPlayer.play(sound: .stopRecording)
+
         output?(.loading(false))
     }
 
     private func resetAutostopTimer(newTimer: Bool = true) {
         timer?.invalidate()
         if newTimer {
-            timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { [weak self] _ in
+            timer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false, block: { [weak self] _ in
                 self?.stopRecording()
             })
         } else {

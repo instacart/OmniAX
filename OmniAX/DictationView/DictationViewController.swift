@@ -52,7 +52,7 @@ final class DictationViewController: UIViewController {
             case .failure:
                 self?.dictationView.show(loading: false)
             case .success:
-                self?.dictationView.show(loading: false)
+                break
             }
             self?.delegate?.dispatch(result: $0)
         }
