@@ -10,7 +10,7 @@ import UIKit
 
 final class DictationView: UIView {
     let dictateButton: UIButton = ._init() {
-        let icon: UIImage = .imageFromLiteral(#imageLiteral(resourceName: "IconMicrophone"))
+        let icon: UIImage = .literal(#imageLiteral(resourceName: "IconMicrophone"))
         $0.setImage(icon, for: .normal)
         $0.setImage(icon.with(color: .lightGray), for: .highlighted)
         $0.accessibilityLabel = NSLocalizedString("Dictate", comment: "")

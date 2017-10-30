@@ -9,7 +9,7 @@
 import Foundation
 
 extension UIImage {
-    static func imageFromLiteral(_ wrapped: WrappedImage) -> UIImage {
+    static func literal(_ wrapped: WrappedImage) -> UIImage {
         return wrapped.image
     }
 
