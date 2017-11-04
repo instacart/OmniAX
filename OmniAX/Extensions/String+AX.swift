@@ -8,7 +8,7 @@
 
 extension String {
     var completeRange: NSRange {
-        return NSRange(location: 0, length: characters.count)
+        return NSRange(location: 0, length: count)
     }
 
     var isBlank: Bool {
