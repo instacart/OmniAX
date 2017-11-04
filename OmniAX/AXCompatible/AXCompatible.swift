@@ -10,16 +10,11 @@ import Foundation
 
 public protocol AXCompatible {
     associatedtype AXCompatibleType where AXCompatibleType: AXCompatible
-    
-    //    static var ax: AXType<CompatibleType>.Type { get }
+
     var ax: AXType<AXCompatibleType> { get }
 }
 
 extension AXCompatible {
-    //    static var ax: AXType<Self>.Type {
-    //        return AXType<Self>.self
-    //    }
-    //
     public var ax: AXType<Self> {
         return AXType(root: self)
     }

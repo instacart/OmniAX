@@ -8,44 +8,20 @@
 
 import Foundation
 
-// MARK: - Definitions
-
-protocol OptionalTextable {
-    var text: String? { get set }
-}
-
-protocol ImplicitlyUnwrappedTextable {
-    var text: String! { get set }
-}
-
-typealias ImplicitlyUnwrappedTextContainer = ImplicitlyUnwrappedTextable & NSObject
-
-typealias OptionalTextContainer = OptionalTextable & NSObject
-
-// MARK: - Compliance
-
-//extension UILabel: OptionalTextable, AXCompatible {
-//    typealias AXCompatibleType = UILabel
-//}
-//
-//extension UITextField: OptionalTextable, AXCompatible {
-//    typealias AXCompatibleType = UITextField
-//}
-//
-//extension UITextView: ImplicitlyUnwrappedTextable, AXCompatible {
-//    typealias AXCompatibleType = UITextView
-//}
-
-// MARK: - AX Methods
-
-extension AXType where Root: ImplicitlyUnwrappedTextContainer {
-    func unabbreviateVoiceOverText() {
+public extension AXType where Root: UITextView {
+    public func unabbreviateVoiceOverText() {
         root.accessibilityLabel = AX.unabbreviate(string: root.text)
     }
 }
 
-extension AXType where Root: OptionalTextContainer {
-    func unabbreviateVoiceOverText() {
+public extension AXType where Root: UITextField {
+    public func unabbreviateVoiceOverText() {
+        root.accessibilityLabel = AX.unabbreviate(string: root.text)
+    }
+}
+
+public extension AXType where Root: UILabel {
+    public func unabbreviateVoiceOverText() {
         root.accessibilityLabel = AX.unabbreviate(string: root.text)
     }
 }
