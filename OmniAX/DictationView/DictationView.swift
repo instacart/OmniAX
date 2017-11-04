@@ -57,7 +57,7 @@ final class DictationView: UIView {
 
             $0.pin(\.centerXAnchor)
                 .pin(\.centerYAnchor, to: self)
-                .set(\.heightAnchor, to: widthHeight)
+                .set(\.heightAnchor)
                 .set(\.widthAnchor, to: widthHeight)
         }
     }
