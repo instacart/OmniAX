@@ -84,6 +84,7 @@
 		221E37431FAE1CC2005F0E13 /* AXCompatible */ = {
 			isa = PBXGroup;
 			children = (
+				2290396C1FAE7DB70038989B /* AXCompatible+UIFont.swift */,
 				221E37411FAE13E3005F0E13 /* AXCompatible.swift */,
 				221E37441FAE1CDD005F0E13 /* AXCompatible+Text.swift */,
 				221E37461FAE1D24005F0E13 /* AXCompatible+UIView.swift */,
@@ -156,7 +157,6 @@
 				22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */,
 				22AB4F751F8459CD00D3BDA9 /* String+AX.swift */,
 				22689B4A1F853FB50044A8CE /* Notification+AX.swift */,
-				22635CA61F9EB9A600BFF4B9 /* UIFont+AX.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

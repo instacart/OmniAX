@@ -9,7 +9,7 @@
 import Foundation
 
 extension UIFont {
-    public func scaled(style: UIFontTextStyle = .headline) -> UIFont {
+    func scaled(style: UIFontTextStyle = .headline) -> UIFont {
         let size = fontDescriptor.fontAttributes[UIFontDescriptorSizeAttribute] as? CGFloat ?? pointSize
 
         let attributes: [String: Any] = [
