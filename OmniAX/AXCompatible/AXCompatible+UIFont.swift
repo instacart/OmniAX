@@ -13,3 +13,16 @@ extension AXType where Root: UIFont {
         return root.scaled(style: style)
     }
 }
+
+//  Example Usage:
+//
+//  extension UIFont {
+//      static func customFont(size: CGFloat) -> UIFont {
+//          return UIFont(name: "yourCustomFontName", size: size)!.ax.dynamicallyScaled()
+//      }
+//  }
+//
+//  struct Example {
+//      let font: UIFont = .customFont(size: 14)
+//  }
+//

@@ -62,16 +62,3 @@ private extension UIFontTextStyle {
         }
     }
 }
-
-//  Example:
-//
-//  extension UIFont {
-//      static func customFont(size: CGFloat) -> UIFont {
-//          return UIFont(name: "yourCustomFontName", size: size)!.scaled()
-//      }
-//  }
-//
-//  struct Example {
-//      let font: UIFont = .customFont(size: 14)
-//  }
-//
