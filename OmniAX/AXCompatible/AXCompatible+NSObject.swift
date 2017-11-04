@@ -11,6 +11,10 @@ import Foundation
 extension NSObject: AXCompatible {}
 
 extension AXType where Root: NSObject {
+    var isFocused: Bool {
+        return AX.isFocused(element: root)
+    }
+    
     func toggle(traits: Traits, enabled: Bool = true, forceAccessible: Bool = true) {
         AX.toggle(
             traits: traits,
