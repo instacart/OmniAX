@@ -7,16 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221233201FA2D7A100A66947 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2212331F1FA2D7A100A66947 /* Images.xcassets */; };
-		2212334A1FA3A9C900A66947 /* UIImage+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221233491FA3A9C900A66947 /* UIImage+AX.swift */; };
-		2212334C1FA3AA1F00A66947 /* CGFloat+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212334B1FA3AA1F00A66947 /* CGFloat+AX.swift */; };
-		221233A11FA7A86300A66947 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221233A01FA7A86200A66947 /* AudioPlayer.swift */; };
-		225239801FA288FF008EBD12 /* Constrainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2252397F1FA288FF008EBD12 /* Constrainer.swift */; };
-		225239831FA289CF008EBD12 /* DictationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225239821FA289CF008EBD12 /* DictationViewController.swift */; };
-		225239851FA28A9D008EBD12 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225239841FA28A9D008EBD12 /* Output.swift */; };
-		225239871FA28AD3008EBD12 /* DictationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225239861FA28AD3008EBD12 /* DictationView.swift */; };
-		225239891FA28B27008EBD12 /* UIView+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225239881FA28B27008EBD12 /* UIView+AX.swift */; };
+		221233201FA2D7A100A66947 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		2212334A1FA3A9C900A66947 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2212334C1FA3AA1F00A66947 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		221233A11FA7A86300A66947 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		223BE5851FAE89300012FFD6 /* CGFloat+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223BE5841FAE89300012FFD6 /* CGFloat+AX.swift */; };
+		223BE5891FAE89390012FFD6 /* UIFont+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223BE5861FAE89390012FFD6 /* UIFont+AX.swift */; };
+		223BE58A1FAE89390012FFD6 /* UIImage+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223BE5871FAE89390012FFD6 /* UIImage+AX.swift */; };
+		223BE58B1FAE89390012FFD6 /* UIView+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223BE5881FAE89390012FFD6 /* UIView+AX.swift */; };
+		223BE58E1FAE89580012FFD6 /* Constrainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223BE58D1FAE89580012FFD6 /* Constrainer.swift */; };
+		225239801FA288FF008EBD12 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		225239851FA28A9D008EBD12 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		225239871FA28AD3008EBD12 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		22689B4B1F853FB50044A8CE /* Notification+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22689B4A1F853FB50044A8CE /* Notification+AX.swift */; };
+		2290397F1FAE88CF0038989B /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397A1FAE88CF0038989B /* AudioPlayer.swift */; };
+		229039801FAE88CF0038989B /* DictationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397B1FAE88CF0038989B /* DictationManager.swift */; };
+		229039811FAE88CF0038989B /* DictationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397C1FAE88CF0038989B /* DictationView.swift */; };
+		229039821FAE88CF0038989B /* DictationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397D1FAE88CF0038989B /* DictationViewController.swift */; };
+		229039831FAE88CF0038989B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397E1FAE88CF0038989B /* Output.swift */; };
 		22AB4F5B1F84103A00D3BDA9 /* OmniAX.h in Headers */ = {isa = PBXBuildFile; fileRef = 22AB4F591F84103A00D3BDA9 /* OmniAX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22AB4F7B1F8459CD00D3BDA9 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F721F8459CD00D3BDA9 /* Notification.swift */; };
 		22AB4F7C1F8459CD00D3BDA9 /* Sequence+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */; };
@@ -26,7 +34,6 @@
 		22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F781F8459CD00D3BDA9 /* AX.swift */; };
 		22AB4F811F8459CD00D3BDA9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F791F8459CD00D3BDA9 /* Message.swift */; };
 		22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */; };
-		22C28EB01FA002C0007E104B /* DictationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28EAF1FA002C0007E104B /* DictationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +41,17 @@
 		221E37441FAE1CDD005F0E13 /* AXCompatible+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AXCompatible+Text.swift"; sourceTree = "<group>"; };
 		221E37461FAE1D24005F0E13 /* AXCompatible+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AXCompatible+UIView.swift"; sourceTree = "<group>"; };
 		221E37481FAE1D69005F0E13 /* AXCompatible+NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AXCompatible+NSObject.swift"; sourceTree = "<group>"; };
+		223BE5841FAE89300012FFD6 /* CGFloat+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+AX.swift"; sourceTree = "<group>"; };
+		223BE5861FAE89390012FFD6 /* UIFont+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AX.swift"; sourceTree = "<group>"; };
+		223BE5871FAE89390012FFD6 /* UIImage+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+AX.swift"; sourceTree = "<group>"; };
+		223BE5881FAE89390012FFD6 /* UIView+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AX.swift"; sourceTree = "<group>"; };
+		223BE58D1FAE89580012FFD6 /* Constrainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constrainer.swift; sourceTree = "<group>"; };
 		22689B4A1F853FB50044A8CE /* Notification+AX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+AX.swift"; sourceTree = "<group>"; };
+		2290397A1FAE88CF0038989B /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		2290397B1FAE88CF0038989B /* DictationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationManager.swift; sourceTree = "<group>"; };
+		2290397C1FAE88CF0038989B /* DictationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationView.swift; sourceTree = "<group>"; };
+		2290397D1FAE88CF0038989B /* DictationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationViewController.swift; sourceTree = "<group>"; };
+		2290397E1FAE88CF0038989B /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		22AB4F561F84103A00D3BDA9 /* OmniAX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmniAX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB4F591F84103A00D3BDA9 /* OmniAX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniAX.h; sourceTree = "<group>"; };
 		22AB4F5A1F84103A00D3BDA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,7 +63,6 @@
 		22AB4F781F8459CD00D3BDA9 /* AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AX.swift; sourceTree = "<group>"; };
 		22AB4F791F8459CD00D3BDA9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationTransformer.swift; sourceTree = "<group>"; };
-		22C28EAF1FA002C0007E104B /* DictationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +96,26 @@
 			path = AXCompatible;
 			sourceTree = "<group>";
 		};
+		223BE58C1FAE89580012FFD6 /* Autolayout */ = {
+			isa = PBXGroup;
+			children = (
+				223BE58D1FAE89580012FFD6 /* Constrainer.swift */,
+			);
+			path = Autolayout;
+			sourceTree = "<group>";
+		};
+		229039791FAE88CF0038989B /* DictationView */ = {
+			isa = PBXGroup;
+			children = (
+				2290397A1FAE88CF0038989B /* AudioPlayer.swift */,
+				2290397B1FAE88CF0038989B /* DictationManager.swift */,
+				2290397C1FAE88CF0038989B /* DictationView.swift */,
+				2290397D1FAE88CF0038989B /* DictationViewController.swift */,
+				2290397E1FAE88CF0038989B /* Output.swift */,
+			);
+			path = DictationView;
+			sourceTree = "<group>";
+		};
 		22AB4F4C1F84103A00D3BDA9 = {
 			isa = PBXGroup;
 			children = (
@@ -99,11 +135,12 @@
 		22AB4F581F84103A00D3BDA9 /* OmniAX */ = {
 			isa = PBXGroup;
 			children = (
+				223BE58C1FAE89580012FFD6 /* Autolayout */,
 				22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */,
 				22AB4F781F8459CD00D3BDA9 /* AX.swift */,
+				229039791FAE88CF0038989B /* DictationView */,
 				22AB4F731F8459CD00D3BDA9 /* Extensions */,
 				22AB4F761F8459CD00D3BDA9 /* Features.swift */,
-				225239811FA289B5008EBD12 /* DictationView */,
 				22AB4F791F8459CD00D3BDA9 /* Message.swift */,
 				22AB4F721F8459CD00D3BDA9 /* Notification.swift */,
 				22AB4F771F8459CD00D3BDA9 /* Traits.swift */,
@@ -116,12 +153,13 @@
 		22AB4F731F8459CD00D3BDA9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				223BE5861FAE89390012FFD6 /* UIFont+AX.swift */,
+				223BE5871FAE89390012FFD6 /* UIImage+AX.swift */,
+				223BE5881FAE89390012FFD6 /* UIView+AX.swift */,
+				223BE5841FAE89300012FFD6 /* CGFloat+AX.swift */,
 				22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */,
 				22AB4F751F8459CD00D3BDA9 /* String+AX.swift */,
 				22689B4A1F853FB50044A8CE /* Notification+AX.swift */,
-				225239881FA28B27008EBD12 /* UIView+AX.swift */,
-				221233491FA3A9C900A66947 /* UIImage+AX.swift */,
-				2212334B1FA3AA1F00A66947 /* CGFloat+AX.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -196,7 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221233201FA2D7A100A66947 /* Images.xcassets in Resources */,
+				221233201FA2D7A100A66947 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,25 +245,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2212334A1FA3A9C900A66947 /* UIImage+AX.swift in Sources */,
-				225239801FA288FF008EBD12 /* Constrainer.swift in Sources */,
+				229039831FAE88CF0038989B /* Output.swift in Sources */,
+				2212334A1FA3A9C900A66947 /* (null) in Sources */,
+				225239801FA288FF008EBD12 /* (null) in Sources */,
+				229039811FAE88CF0038989B /* DictationView.swift in Sources */,
 				22AB4F7E1F8459CD00D3BDA9 /* Features.swift in Sources */,
-				221E37471FAE1D24005F0E13 /* AXCompatible+UIView.swift in Sources */,
+				223BE58A1FAE89390012FFD6 /* UIImage+AX.swift in Sources */,
 				22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */,
-				2212334C1FA3AA1F00A66947 /* CGFloat+AX.swift in Sources */,
+				2212334C1FA3AA1F00A66947 /* (null) in Sources */,
 				22AB4F7B1F8459CD00D3BDA9 /* Notification.swift in Sources */,
-				221E37491FAE1D69005F0E13 /* AXCompatible+NSObject.swift in Sources */,
-				221E37451FAE1CDD005F0E13 /* AXCompatible+Text.swift in Sources */,
 				22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */,
-				225239871FA28AD3008EBD12 /* DictationView.swift in Sources */,
+				225239871FA28AD3008EBD12 /* (null) in Sources */,
+				223BE5851FAE89300012FFD6 /* CGFloat+AX.swift in Sources */,
 				22AB4F7D1F8459CD00D3BDA9 /* String+AX.swift in Sources */,
+				229039821FAE88CF0038989B /* DictationViewController.swift in Sources */,
 				22AB4F7F1F8459CD00D3BDA9 /* Traits.swift in Sources */,
-				221233A11FA7A86300A66947 /* AudioPlayer.swift in Sources */,
+				221233A11FA7A86300A66947 /* (null) in Sources */,
+				223BE5891FAE89390012FFD6 /* UIFont+AX.swift in Sources */,
+				2290397F1FAE88CF0038989B /* AudioPlayer.swift in Sources */,
 				22689B4B1F853FB50044A8CE /* Notification+AX.swift in Sources */,
+				223BE58E1FAE89580012FFD6 /* Constrainer.swift in Sources */,
 				22AB4F7C1F8459CD00D3BDA9 /* Sequence+AX.swift in Sources */,
-				221E37421FAE13E3005F0E13 /* AXCompatible.swift in Sources */,
 				22AB4F811F8459CD00D3BDA9 /* Message.swift in Sources */,
-				225239851FA28A9D008EBD12 /* Output.swift in Sources */,
+				229039801FAE88CF0038989B /* DictationManager.swift in Sources */,
+				225239851FA28A9D008EBD12 /* (null) in Sources */,
+				223BE58B1FAE89390012FFD6 /* UIView+AX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
