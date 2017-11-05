@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>For dictation purposes, this app needs access to your device&apos;s microphone.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Your voice will be used for dictation to accessibility elements where system-provided dictation is unavailable</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
