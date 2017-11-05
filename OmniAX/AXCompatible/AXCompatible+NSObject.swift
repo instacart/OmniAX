@@ -11,11 +11,11 @@ import Foundation
 extension NSObject: AXCompatible {}
 
 extension AXType where Root: NSObject {
-    var isFocused: Bool {
+    public var isFocused: Bool {
         return AX.isFocused(element: root)
     }
     
-    func toggle(traits: Traits, enabled: Bool = true, forceAccessible: Bool = true) {
+    public func toggle(traits: Traits, enabled: Bool = true, forceAccessible: Bool = true) {
         AX.toggle(
             traits: traits,
             enabled: enabled,
@@ -24,7 +24,7 @@ extension AXType where Root: NSObject {
         )
     }
     
-    func summarizeInSelf(elements: [NSObject?], inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
+    public func summarizeInSelf(elements: [NSObject?], inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
         AX.summarize(
             elements: elements,
             in: root,

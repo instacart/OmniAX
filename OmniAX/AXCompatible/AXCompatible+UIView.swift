@@ -9,7 +9,7 @@
 import Foundation
 
 extension AXType where Root: UIView {
-    func colorInversion(ignored: Bool) {
+    public func colorInversion(ignored: Bool) {
         if #available(iOS 11.0, *) {
             root.accessibilityIgnoresInvertColors = ignored
         }
