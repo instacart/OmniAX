@@ -18,6 +18,7 @@
 		223BE5941FAE8E3A0012FFD6 /* AXCompatible+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E37441FAE1CDD005F0E13 /* AXCompatible+Text.swift */; };
 		223BE5951FAE8E3A0012FFD6 /* AXCompatible+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E37461FAE1D24005F0E13 /* AXCompatible+UIView.swift */; };
 		223BE5961FAE8E3A0012FFD6 /* AXCompatible+NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E37481FAE1D69005F0E13 /* AXCompatible+NSObject.swift */; };
+		224D40F81FB02BC00041A950 /* LoadingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224D40F71FB02BC00041A950 /* LoadingLayer.swift */; };
 		22689B4B1F853FB50044A8CE /* Notification+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22689B4A1F853FB50044A8CE /* Notification+AX.swift */; };
 		2290397F1FAE88CF0038989B /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397A1FAE88CF0038989B /* AudioPlayer.swift */; };
 		229039801FAE88CF0038989B /* DictationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397B1FAE88CF0038989B /* DictationManager.swift */; };
@@ -47,6 +48,7 @@
 		223BE58D1FAE89580012FFD6 /* Constrainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constrainer.swift; sourceTree = "<group>"; };
 		223BE58F1FAE8A530012FFD6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "OmniAX/Supporting Files/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		223BE5911FAE8DCC0012FFD6 /* AXCompatible+UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AXCompatible+UIFont.swift"; sourceTree = "<group>"; };
+		224D40F71FB02BC00041A950 /* LoadingLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLayer.swift; sourceTree = "<group>"; };
 		22689B4A1F853FB50044A8CE /* Notification+AX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+AX.swift"; sourceTree = "<group>"; };
 		2290397A1FAE88CF0038989B /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		2290397B1FAE88CF0038989B /* DictationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationManager.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				2290397B1FAE88CF0038989B /* DictationManager.swift */,
 				2290397C1FAE88CF0038989B /* DictationView.swift */,
 				2290397D1FAE88CF0038989B /* DictationViewController.swift */,
+				224D40F71FB02BC00041A950 /* LoadingLayer.swift */,
 				2290397E1FAE88CF0038989B /* Output.swift */,
 			);
 			path = DictationView;
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				229039831FAE88CF0038989B /* Output.swift in Sources */,
+				224D40F81FB02BC00041A950 /* LoadingLayer.swift in Sources */,
 				229039811FAE88CF0038989B /* DictationView.swift in Sources */,
 				223BE5931FAE8E3A0012FFD6 /* AXCompatible.swift in Sources */,
 				223BE5951FAE8E3A0012FFD6 /* AXCompatible+UIView.swift in Sources */,

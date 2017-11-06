@@ -17,7 +17,7 @@ final class DictationView: UIView {
         $0.accessibilityHint = NSLocalizedString("Press to dictate", comment: "")
     }
 
-    weak var delegate: DictationDelegate?
+    weak var delegate: AXDictationDelegate?
 
     private lazy var borderLayer: CALayer = {
         let layer = CALayer()
@@ -25,13 +25,8 @@ final class DictationView: UIView {
         return layer
     }()
 
-    private lazy var loadingLayer: CAShapeLayer = {
-        let layer = CAShapeLayer()
-        layer.strokeColor = UIColor.black.cgColor
-        layer.fillColor = UIColor.clear.cgColor
-        layer.lineWidth = 2
-        layer.strokeEnd = 0
-        return layer
+    private lazy var loadingLayer: LoadingLayer = {
+        return LoadingLayer()
     }()
 
     private static let buttonWidthHeight: CGFloat = 50
@@ -39,6 +34,8 @@ final class DictationView: UIView {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
 
+        backgroundColor = .white
+        
         addSubview(dictateButton)
 
         layer.addSublayer(borderLayer)
@@ -63,29 +60,7 @@ final class DictationView: UIView {
     }
 
     func show(loading: Bool) {
-        if loading {
-            let start = CABasicAnimation(keyPath: "strokeStart")
-            start.toValue = 1
-            start.duration = 1
-            start.beginTime = 0.25
-            start.fillMode = kCAFillModeForwards
-            start.timingFunction = .init(name: kCAMediaTimingFunctionEaseInEaseOut)
-
-            let end = CABasicAnimation(keyPath: "strokeEnd")
-            end.toValue = 1
-            end.duration = 1
-            end.fillMode = kCAFillModeForwards
-
-            let group = CAAnimationGroup()
-            group.animations = [start, end]
-            group.duration = 1.5
-
-            group.repeatCount = .infinity
-
-            loadingLayer.add(group, forKey: nil)
-        } else {
-            loadingLayer.removeAllAnimations()
-        }
+        loadingLayer.show(loading: loading)
     }
 
     override func layoutSubviews() {
@@ -97,24 +72,5 @@ final class DictationView: UIView {
         let twoPi: CGFloat = 2 * .pi
         let startAngle: CGFloat = -0.25 * twoPi
         loadingLayer.path = UIBezierPath(arcCenter: center, radius: dictateButton.frame.size.height / 2, startAngle: startAngle, endAngle: startAngle + twoPi, clockwise: true).cgPath
-    }
-}
-
-@available(iOS 10.0, *)
-extension AX {
-    static let dictationViewController: DictationViewController = .init()
-
-    public static var dictationInputAccessoryView: UIView {
-        dictationViewController.view.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 60))
-        return dictationViewController.view
-    }
-
-    public static var dictationDelegate: DictationDelegate? {
-        get {
-            return dictationViewController.dictationView.delegate
-        }
-        set {
-            dictationViewController.dictationView.delegate = newValue
-        }
     }
 }

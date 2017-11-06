@@ -22,7 +22,7 @@ extension Output where A == String {
     }
 }
 
-public protocol DictationDelegate: class {
+public protocol AXDictationDelegate: class {
     func dispatch(result: Output<String>)
 }
 
@@ -32,7 +32,7 @@ final class DictationViewController: UIViewController {
         $0.dictateButton.addTarget(self, action: #selector(didTapDictate(sender:)), for: .touchUpInside)
     }
 
-    private weak var delegate: DictationDelegate? {
+    private weak var delegate: AXDictationDelegate? {
         return dictationView.delegate
     }
 
@@ -40,10 +40,12 @@ final class DictationViewController: UIViewController {
         return DictationManager()
     }()
 
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        view = dictationView
+    }
 
-        view.addSubview(dictationView)
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         dictationManager.output = { [weak self] in
             switch $0 {
@@ -64,18 +66,13 @@ final class DictationViewController: UIViewController {
         checkAccess()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        dictationView.frame = view.frame
-    }
-
     @objc private func didTapDictate(sender: UIButton) {
         dictationManager.toggleDictation()
     }
 
     private func checkAccess() {
         let status = SFSpeechRecognizer.authorizationStatus()
+
         guard status == .notDetermined else {
             return dictationView.dictateButton.isEnabled = status == .authorized
         }
