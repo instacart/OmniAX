@@ -24,14 +24,14 @@ final class DictationManager {
     var output: OutputHandler<String>?
 
     func toggleDictation() {
-        guard !audioEngine.isRunning else {
-            stopRecording()
-            return
-        }
-
-        output?(.loading(true))
-
         do {
+            guard !audioEngine.isRunning else {
+                try stopRecording()
+                return
+            }
+
+            output?(.loading(true))
+
             AudioPlayer.play(sound: .startRecording)
 
             guard let request = try setupAudioNode() else {
@@ -50,18 +50,22 @@ final class DictationManager {
             resetAutostopTimer()
 
             recognitionTask = speechRecognizer.recognitionTask(with: request, resultHandler: { [weak self] result, error in
-                if let result = result {
-                    let resultString = result.bestTranscription.formattedString
-                    output(.success(resultString))
-                    if result.isFinal {
-                        self?.stopRecording()
-                        AX.post(notification: .announcement, focus: String.localizedStringWithFormat("Dictate. Entered: %@", resultString))
-                    } else {
-                        self?.resetAutostopTimer()
+                do {
+                    if let result = result {
+                        let resultString = result.bestTranscription.formattedString
+                        output(.success(resultString))
+                        if result.isFinal {
+                            try self?.stopRecording()
+                            AX.announce(message: .localizedStringWithFormat("Dictate. Entered: %@", resultString))
+                        } else {
+                            self?.resetAutostopTimer()
+                        }
+                    } else if let error = error {
+                        output(.failure(error))
+                        try self?.stopRecording()
                     }
-                } else if let error = error {
+                } catch {
                     output(.failure(error))
-                    self?.stopRecording()
                 }
             })
         } catch {
@@ -92,12 +96,14 @@ final class DictationManager {
         return true
     }
 
-    private func stopRecording() {
+    private func stopRecording() throws {
         guard audioEngine.isRunning else {
             return
         }
         audioEngine.stop()
         audioEngine.inputNode?.removeTap(onBus: nodeBus)
+        
+        try audioSession.setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options: .allowBluetoothA2DP)
 
         recognitionTask?.cancel()
         recognitionTask = nil
@@ -112,7 +118,11 @@ final class DictationManager {
         timer?.invalidate()
         if newTimer {
             timer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false, block: { [weak self] _ in
-                self?.stopRecording()
+                do {
+                    try self?.stopRecording()
+                } catch {
+                    self?.output?(.failure(error))
+                }
             })
         } else {
             timer = nil

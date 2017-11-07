@@ -9,9 +9,9 @@
 import Foundation
 
 public protocol AXCompatible {
-    associatedtype AXCompatibleType where AXCompatibleType: AXCompatible
+    associatedtype CompatibleType where CompatibleType: AXCompatible
 
-    var ax: AXType<AXCompatibleType> { get }
+    var ax: AXType<CompatibleType> { get }
 }
 
 extension AXCompatible {

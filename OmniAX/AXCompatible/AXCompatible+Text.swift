@@ -8,37 +8,7 @@
 
 import Foundation
 
-public extension AXType where Root: UITextView {
-    public func unabbreviateVoiceOverText() {
-        root.accessibilityLabel = AX.unabbreviate(string: root.text)
-    }
-
-    /// Sets a custom inputAccessoryView for the root UITextView
-    /// Important to have values for the following Cocoa Keys in your app's Info.plist
-    /// NSSpeechRecognitionUsageDescription and NSMicrophoneUsageDescription
-    ///
-    public func dictationInputAccessoryView(parent: UIViewController?, delegate: AXDictationDelegate?) {
-        if #available(iOS 10.0, *) {
-            root.inputAccessoryView = AX.dictationInputAccessoryView(parent: controller, delegate: delegate)
-        }
-    }
-}
-
-public extension AXType where Root: UITextField {
-    public func unabbreviateVoiceOverText() {
-        root.accessibilityLabel = AX.unabbreviate(string: root.text)
-    }
-
-    /// Sets a custom inputAccessoryView for the root UITextField
-    /// Important to have values for the following Cocoa Keys in your app's Info.plist
-    /// NSSpeechRecognitionUsageDescription and NSMicrophoneUsageDescription
-    ///
-    public func dictationInputAccessoryView(parent: UIViewController?, delegate: AXDictationDelegate?) {
-        if #available(iOS 10.0, *) {
-            root.inputAccessoryView = AX.dictationInputAccessoryView(parent: parent, delegate: delegate)
-        }
-    }
-}
+// MARK: - VoiceOver Unabbreviation
 
 public extension AXType where Root: UILabel {
     public func unabbreviateVoiceOverText() {
@@ -46,36 +16,53 @@ public extension AXType where Root: UILabel {
     }
 }
 
-extension AX {
-    @available(iOS 10.0, *)
-    private static let dictationViewController = DictationViewController()
+public extension AXType where Root: UITextView {
+    public func unabbreviateVoiceOverText() {
+        root.accessibilityLabel = AX.unabbreviate(string: root.text)
+    }
+}
 
-    static func dictationInputAccessoryView(parent: UIViewController?, delegate: AXDictationDelegate?) -> UIView? {
-        var width: CGFloat = UIScreen.main.bounds.width
+public extension AXType where Root: UITextField {
+    public func unabbreviateVoiceOverText() {
+        root.accessibilityLabel = AX.unabbreviate(string: root.text)
+    }
+}
 
-        var controller: UIViewController? = nil
-        if #available(iOS 10.0, *) {
-            controller = AX.dictationViewController
-            (controller as? DictationViewController)?.dictationView.delegate = delegate
+// MARK: - Dictation InputAccessoryView
+
+public extension AXType where Root: UITextView {
+    /// Sets a custom inputAccessoryView for the root UITextView
+    /// Important to have values for the following Cocoa Keys in your app's Info.plist
+    /// NSSpeechRecognitionUsageDescription and NSMicrophoneUsageDescription
+    ///
+    public func dictationInputAccessoryView(parent: UIViewController?, delegate: DictationDelegate?) -> OutputReference? {
+        guard let (view, reference) = dictationView(parent: parent, delegate: delegate) else {
+            return nil
         }
+        root.inputAccessoryView = view
+        return reference
+    }
+}
 
-        controller?.view.removeFromSuperview()
-
-        if let parent = parent, let child = controller {
-            parent.addChildViewController(child)
-            child.didMove(toParentViewController: parent)
-
-            width = parent.view.bounds.width
+public extension AXType where Root: UITextField {
+    /// Sets a custom inputAccessoryView for the root UITextField
+    /// Important to have values for the following Cocoa Keys in your app's Info.plist
+    /// NSSpeechRecognitionUsageDescription and NSMicrophoneUsageDescription
+    ///
+    public func dictationInputAccessoryView(parent: UIViewController?, delegate: DictationDelegate?) -> OutputReference? {
+        guard let (view, reference) = dictationView(parent: parent, delegate: delegate) else {
+            return nil
         }
+        root.inputAccessoryView = view
+        return reference
+    }
+}
 
-        controller?.view.frame = CGRect(
-            origin: .zero,
-            size: CGSize(
-                width: width,
-                height: 60
-            )
-        )
-
-        return controller?.view
+fileprivate extension AXType {
+    func dictationView(parent: UIViewController?, delegate: DictationDelegate?) -> (UIView, OutputReference)? {
+        guard #available(iOS 10.0, *) else {
+            return nil
+        }
+        return AX.dictationInputAccessoryView(parent: parent, delegate: delegate)
     }
 }

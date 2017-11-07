@@ -36,7 +36,7 @@ final class DictationViewController: UIViewController {
         return dictationView.delegate
     }
 
-    private lazy var dictationManager: DictationManager = {
+    fileprivate lazy var dictationManager: DictationManager = {
         return DictationManager()
     }()
 
@@ -56,7 +56,7 @@ final class DictationViewController: UIViewController {
             case .success:
                 break
             }
-            self?.delegate?.dispatch(result: $0)
+            DictationOutputManager.instance.dispatch(output: $0)
         }
     }
 
@@ -82,5 +82,135 @@ final class DictationViewController: UIViewController {
                 self?.dictationView.dictateButton.isEnabled = state == .authorized
             }
         }
+    }
+}
+
+//final class OutputManager {
+//    private let outputs = NSPointerArray.weakObjects()
+//
+//    var activeOutput: AnyObject? {
+//        outputs.compact()
+//
+//        for pointerIndex in 0..<outputs.count {
+//            guard let pointer = outputs.pointer(at: pointerIndex) else { continue }
+//            let object = Unmanaged<AnyObject>.fromOpaque(pointer).takeUnretainedValue()
+//
+//            if let object = object as? UITextField, object.isFirstResponder {
+//                return object
+//            } else if let object = object as? UITextView, object.isFirstResponder {
+//                return object
+//            }
+//        }
+//        return nil
+//    }
+//
+//    func add(output: UIResponder) {
+//        let outputPointer = Unmanaged.passUnretained(output).toOpaque()
+//        outputs.addPointer(outputPointer)
+//    }
+//}
+//
+//extension OutputManager: AXDictationDelegate {
+//    func dispatch(result: Output<String>) {
+//        switch result {
+//        case .success(let text):
+//            set(text: text, for: activeOutput)
+//        default:
+//            break
+//        }
+//    }
+//
+//    private func set(text: String, for output: AnyObject?) {
+//        if let active = output as? UITextField {
+//            active.text = text
+//        } else if let active = output as? UITextView {
+//            active.text = text
+//        }
+//    }
+//}
+
+public protocol DictationDelegate: class {
+    func dispatch(output: Output<String>)
+}
+
+final class DictationOutputManager {
+    static let instance = DictationOutputManager()
+    
+    var outputs: Set<WrappedDelegate> = []
+    
+    func remove(wrapped: WrappedDelegate) {
+        outputs.remove(wrapped)
+    }
+    
+    func add(delegate: DictationDelegate?) -> OutputReference {
+        let reference = OutputReference(delegate: delegate)
+        outputs.insert(reference.wrapped)
+        
+        return reference
+    }
+    
+    func dispatch(output: Output<String>) {
+        outputs.forEach({ $0.delegate?.dispatch(output: output) })
+    }
+}
+
+final class WrappedDelegate {
+    let id = UUID()
+    weak var delegate: DictationDelegate?
+    
+    init(delegate: DictationDelegate?) {
+        self.delegate = delegate
+    }
+}
+
+extension WrappedDelegate: Hashable {
+    public var hashValue: Int {
+        return id.hashValue
+    }
+    
+    public static func ==(lhs: WrappedDelegate, rhs: WrappedDelegate) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+public final class OutputReference {
+    private(set) var wrapped: WrappedDelegate
+
+    init(delegate: DictationDelegate?) {
+        self.wrapped = WrappedDelegate(delegate: delegate)
+    }
+
+    deinit {
+        DictationOutputManager.instance.remove(wrapped: wrapped)
+    }
+}
+
+@available(iOS 10.0, *)
+extension AX {
+    fileprivate static let dictationViewController = DictationViewController()
+    
+    static func dictationInputAccessoryView(parent: UIViewController?, delegate: DictationDelegate?) -> (UIView, OutputReference) {
+        var width: CGFloat = UIScreen.main.bounds.width
+        
+        let controller = AX.dictationViewController
+
+        controller.view.removeFromSuperview()
+
+        if let parent = parent {
+            parent.addChildViewController(controller)
+            controller.didMove(toParentViewController: parent)
+
+            width = parent.view.bounds.width
+        }
+
+        controller.view.frame = CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: width,
+                height: 60
+            )
+        )
+
+        return (controller.view, DictationOutputManager.instance.add(delegate: delegate))
     }
 }
