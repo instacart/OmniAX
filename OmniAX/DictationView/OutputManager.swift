@@ -8,23 +8,41 @@
 
 import Foundation
 
-final class ReferenceManager<T> {
-    fileprivate var outputs: Set<Wrapped<T>> = []
+public protocol Dispatchable: class {
+    associatedtype DispatchType
     
-    func remove(wrapped: Wrapped<T>) {
+    func dispatch(output: DispatchType)
+}
+
+class GenericReferenceManager<Handler: Dispatchable> {
+    private(set) var outputs: Set<Wrapped<Handler>> = []
+
+    final func remove(wrapped: Wrapped<Handler>) {
         outputs.remove(wrapped)
     }
     
-    func add(_ object: T?) -> Reference<T> {
-        let reference = Reference(object, manager: self)
+    final func add(_ object: Handler?) -> Reference<Handler> {
+        let reference: Reference<Handler> = Reference(object: object, manager: self)
         outputs.insert(reference.wrapped)
         
         return reference
     }
-}
-
-extension ReferenceManager where T == DictationDelegate {
-    func dispatch(output: Output<String>) {
-        outputs.forEach({ $0.wrapped?.dispatch(output: output) })
+    
+    func dispatch(output: Handler.DispatchType) {
+        for observer in outputs {
+            observer.wrapped?.dispatch(output: output)
+        }
     }
 }
+
+protocol AXDictationDelegate: class {
+    func dispatch(output: Output<String>)
+}
+
+final class WrappedDelegate {
+    private weak var delegate: AXDictationDelegate?
+}
+
+typealias WrappedOutput = Wrapped<DictationDelegate>
+
+final class DictationReferenceManager: GenericReferenceManager<WrappedDelegate> {}

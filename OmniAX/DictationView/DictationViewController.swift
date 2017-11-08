@@ -9,8 +9,8 @@
 import UIKit
 import Speech
 
-public protocol DictationDelegate: class {
-    func dispatch(output: Output<String>)
+public protocol DictationDelegate: Dispatchable {
+    typealias DispatchType = Output<String>
 }
 
 @available(iOS 10.0, *)
@@ -23,7 +23,7 @@ final class DictationViewController: UIViewController {
         return DictationManager()
     }()
     
-    private var outputManager = ReferenceManager<DictationDelegate>()
+    private var outputManager = DictationReferenceManager()
 
     override func loadView() {
         view = dictationView
@@ -69,7 +69,7 @@ final class DictationViewController: UIViewController {
         }
     }
     
-    func add(delegate: DictationDelegate?) -> Reference<DictationDelegate> {
+    func add<T>(delegate: T?) -> Reference<T> {
         return outputManager.add(delegate)
     }
 }
@@ -78,7 +78,7 @@ final class DictationViewController: UIViewController {
 extension AX {
     fileprivate static let dictationViewController = DictationViewController()
     
-    static func dictationInputAccessoryView(parent: UIViewController?, delegate: DictationDelegate?) -> (UIView, Reference<DictationDelegate>) {
+    static func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> (UIView, Reference<T>) {
         var width: CGFloat = UIScreen.main.bounds.width
         
         let controller = AX.dictationViewController

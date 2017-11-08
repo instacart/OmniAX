@@ -8,11 +8,11 @@
 
 import Foundation
 
-final class Wrapped<T> {
+final class Wrapped<T: AnyObject> {
     let id = UUID()
-    var wrapped: T?
+    private(set) weak var wrapped: T?
     
-    init(_ wrapped: T?) {
+    init(wrapped: T?) {
         self.wrapped = wrapped
     }
 }
