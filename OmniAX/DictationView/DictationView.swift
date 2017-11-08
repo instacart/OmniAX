@@ -17,8 +17,6 @@ final class DictationView: UIView {
         $0.accessibilityHint = NSLocalizedString("Press to dictate", comment: "")
     }
 
-    weak var delegate: AXDictationDelegate?
-
     private lazy var borderLayer: CALayer = {
         let layer = CALayer()
         layer.backgroundColor = UIColor.gray.cgColor
