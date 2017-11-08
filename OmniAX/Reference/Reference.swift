@@ -8,12 +8,11 @@
 
 import Foundation
 
-public final class Reference<T: Dispatchable> {
-    private(set) var wrapped: Wrapped<T>
-    private weak var manager: GenericReferenceManager<T>?
+public final class Reference {
+    private let wrapped: WrappedHashable<AnyObject>
+    private weak var manager: ReferenceManager?
     
-    init(object: T?, manager: GenericReferenceManager<T>) {
-        let wrapped: Wrapped<T> = Wrapped(wrapped: object)
+    init(wrapped: WrappedHashable<AnyObject>, manager: ReferenceManager?) {
         self.wrapped = wrapped
         self.manager = manager
     }

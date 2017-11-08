@@ -25,9 +25,10 @@
 		229039811FAE88CF0038989B /* DictationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397C1FAE88CF0038989B /* DictationView.swift */; };
 		229039821FAE88CF0038989B /* DictationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397D1FAE88CF0038989B /* DictationViewController.swift */; };
 		229039831FAE88CF0038989B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397E1FAE88CF0038989B /* Output.swift */; };
-		2297164D1FB27BD700296910 /* Wrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297164C1FB27BD700296910 /* Wrapped.swift */; };
+		22951EDD1FB2E530002DFF78 /* Dispatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22951EDC1FB2E530002DFF78 /* Dispatchable.swift */; };
+		2297164D1FB27BD700296910 /* WrappedHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297164C1FB27BD700296910 /* WrappedHashable.swift */; };
 		2297164F1FB27BF900296910 /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297164E1FB27BF900296910 /* Reference.swift */; };
-		229716511FB27C3600296910 /* OutputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229716501FB27C3600296910 /* OutputManager.swift */; };
+		229716511FB27C3600296910 /* ReferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229716501FB27C3600296910 /* ReferenceManager.swift */; };
 		22AB4F5B1F84103A00D3BDA9 /* OmniAX.h in Headers */ = {isa = PBXBuildFile; fileRef = 22AB4F591F84103A00D3BDA9 /* OmniAX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22AB4F7B1F8459CD00D3BDA9 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F721F8459CD00D3BDA9 /* Notification.swift */; };
 		22AB4F7C1F8459CD00D3BDA9 /* Sequence+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */; };
@@ -58,9 +59,10 @@
 		2290397C1FAE88CF0038989B /* DictationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationView.swift; sourceTree = "<group>"; };
 		2290397D1FAE88CF0038989B /* DictationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationViewController.swift; sourceTree = "<group>"; };
 		2290397E1FAE88CF0038989B /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
-		2297164C1FB27BD700296910 /* Wrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wrapped.swift; sourceTree = "<group>"; };
+		22951EDC1FB2E530002DFF78 /* Dispatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatchable.swift; sourceTree = "<group>"; };
+		2297164C1FB27BD700296910 /* WrappedHashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedHashable.swift; sourceTree = "<group>"; };
 		2297164E1FB27BF900296910 /* Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
-		229716501FB27C3600296910 /* OutputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputManager.swift; sourceTree = "<group>"; };
+		229716501FB27C3600296910 /* ReferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceManager.swift; sourceTree = "<group>"; };
 		22AB4F561F84103A00D3BDA9 /* OmniAX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmniAX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB4F591F84103A00D3BDA9 /* OmniAX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniAX.h; sourceTree = "<group>"; };
 		22AB4F5A1F84103A00D3BDA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,9 +126,19 @@
 				2290397D1FAE88CF0038989B /* DictationViewController.swift */,
 				224D40F71FB02BC00041A950 /* LoadingLayer.swift */,
 				2290397E1FAE88CF0038989B /* Output.swift */,
-				229716501FB27C3600296910 /* OutputManager.swift */,
 			);
 			path = DictationView;
+			sourceTree = "<group>";
+		};
+		22951EDB1FB2E514002DFF78 /* Reference */ = {
+			isa = PBXGroup;
+			children = (
+				2297164C1FB27BD700296910 /* WrappedHashable.swift */,
+				2297164E1FB27BF900296910 /* Reference.swift */,
+				229716501FB27C3600296910 /* ReferenceManager.swift */,
+				22951EDC1FB2E530002DFF78 /* Dispatchable.swift */,
+			);
+			path = Reference;
 			sourceTree = "<group>";
 		};
 		22AB4F4C1F84103A00D3BDA9 = {
@@ -148,8 +160,7 @@
 		22AB4F581F84103A00D3BDA9 /* OmniAX */ = {
 			isa = PBXGroup;
 			children = (
-				2297164C1FB27BD700296910 /* Wrapped.swift */,
-				2297164E1FB27BF900296910 /* Reference.swift */,
+				22951EDB1FB2E514002DFF78 /* Reference */,
 				22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */,
 				22AB4F781F8459CD00D3BDA9 /* AX.swift */,
 				223BE58C1FAE89580012FFD6 /* Autolayout */,
@@ -271,10 +282,10 @@
 				22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */,
 				22AB4F7B1F8459CD00D3BDA9 /* Notification.swift in Sources */,
 				22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */,
-				2297164D1FB27BD700296910 /* Wrapped.swift in Sources */,
+				2297164D1FB27BD700296910 /* WrappedHashable.swift in Sources */,
 				223BE5961FAE8E3A0012FFD6 /* AXCompatible+NSObject.swift in Sources */,
 				223BE5851FAE89300012FFD6 /* CGFloat+AX.swift in Sources */,
-				229716511FB27C3600296910 /* OutputManager.swift in Sources */,
+				229716511FB27C3600296910 /* ReferenceManager.swift in Sources */,
 				22AB4F7D1F8459CD00D3BDA9 /* String+AX.swift in Sources */,
 				223BE5921FAE8DCC0012FFD6 /* AXCompatible+UIFont.swift in Sources */,
 				229039821FAE88CF0038989B /* DictationViewController.swift in Sources */,
@@ -288,6 +299,7 @@
 				2297164F1FB27BF900296910 /* Reference.swift in Sources */,
 				229039801FAE88CF0038989B /* DictationManager.swift in Sources */,
 				223BE58B1FAE89390012FFD6 /* UIView+AX.swift in Sources */,
+				22951EDD1FB2E530002DFF78 /* Dispatchable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

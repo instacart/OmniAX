@@ -8,21 +8,21 @@
 
 import Foundation
 
-final class Wrapped<T: AnyObject> {
+final class WrappedHashable<T: AnyObject> {
     let id = UUID()
     private(set) weak var wrapped: T?
     
-    init(wrapped: T?) {
+    init(_ wrapped: T?) {
         self.wrapped = wrapped
     }
 }
 
-extension Wrapped: Hashable {
+extension WrappedHashable: Hashable {
     public var hashValue: Int {
         return id.hashValue
     }
     
-    public static func ==(lhs: Wrapped, rhs: Wrapped) -> Bool {
+    public static func ==(lhs: WrappedHashable, rhs: WrappedHashable) -> Bool {
         return lhs.id == rhs.id
     }
 }
