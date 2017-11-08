@@ -50,6 +50,11 @@ final class DictationViewController: UIViewController {
 
         checkAccess()
     }
+    
+    
+    func add(delegate: DictationDelegate?) -> ManagedReference {
+        return outputManager.add(WrappedHashable(delegate as AnyObject))
+    }
 
     @objc private func didTapDictate(sender: UIButton) {
         dictationManager.toggleDictation()
@@ -68,17 +73,13 @@ final class DictationViewController: UIViewController {
             }
         }
     }
-    
-    func add(delegate: DictationDelegate?) -> Reference {
-        return outputManager.add(WrappedHashable(delegate as AnyObject))
-    }
 }
 
 @available(iOS 10.0, *)
 extension AX {
     fileprivate static let dictationViewController = DictationViewController()
     
-    static func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> (UIView, Reference) {
+    static func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> (UIView, ManagedReference) {
         var width: CGFloat = UIScreen.main.bounds.width
         
         let controller = AX.dictationViewController

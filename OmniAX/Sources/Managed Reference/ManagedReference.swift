@@ -1,5 +1,5 @@
 //
-//  Reference.swift
+//  ManagedReference.swift
 //  OmniAX
 //
 //  Created by Dan Loman on 11/7/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class Reference {
+public final class ManagedReference {
     private let wrapped: WrappedHashable<AnyObject>
     private weak var manager: ReferenceManager?
     
