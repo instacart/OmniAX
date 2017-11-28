@@ -103,7 +103,7 @@ final class DictationManager {
         audioEngine.stop()
         audioEngine.inputNode?.removeTap(onBus: nodeBus)
         
-        try audioSession.setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options: .allowBluetoothA2DP)
+        try audioSession.setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options: [])
 
         recognitionTask?.cancel()
         recognitionTask = nil
