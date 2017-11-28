@@ -13,6 +13,10 @@ final class Constrainer {
         return !constraints.isEmpty
     }
 
+    var hasPendingConstraints: Bool {
+        return !(pendingPins.isEmpty && pendingConstants.isEmpty)
+    }
+
     private let view: UIView
     private var constraints: [NSLayoutConstraint] = []
     private var pendingConstants: [PartialKeyPath<UIView>] = []
@@ -26,6 +30,8 @@ final class Constrainer {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate(constraints)
+
+        constraints.removeAll()
     }
 
     private func append(constraint: NSLayoutConstraint) {
@@ -34,7 +40,7 @@ final class Constrainer {
     }
 
     @discardableResult
-    func pin(_ path: KeyPath<UIView, NSLayoutYAxisAnchor>, to: UIView? = nil) -> Constrainer {
+    func pin<Anchor, Axis>(_ path: KeyPath<UIView, Anchor>, to: UIView? = nil) -> Constrainer where Anchor: NSLayoutAnchor<Axis>  {
         if let to = to {
             append(constraint: view[keyPath: path].constraint(equalTo: to[keyPath: path]))
             setPendingPins(to: to)
@@ -45,34 +51,27 @@ final class Constrainer {
     }
 
     @discardableResult
-    func pin(_ path: KeyPath<UIView, NSLayoutXAxisAnchor>, to: UIView? = nil) -> Constrainer {
-        if let to = to {
-            append(constraint: view[keyPath: path].constraint(equalTo: to[keyPath: path]))
-            setPendingPins(to: to)
-        } else {
-            pendingPins.append(path)
+    func pinToSuperview<Anchor, Axis>(_ path: KeyPath<UIView, Anchor>) -> Constrainer where Anchor: NSLayoutAnchor<Axis> {
+        guard let to = view.superview else {
+            fatalError("View has no superview")
         }
-        return self
-    }
-
-    @discardableResult
-    func pin(_ path: KeyPath<UIView, NSLayoutDimension>, to: UIView? = nil) -> Constrainer {
-        if let to = to {
-            append(constraint: view[keyPath: path].constraint(equalTo: to[keyPath: path]))
-            setPendingPins(to: to)
-        } else {
-            pendingPins.append(path)
-        }
-        return self
+        return pin(path, to: to)
     }
 
     @discardableResult
     func set(_ path: KeyPath<UIView, NSLayoutDimension>, to: CGFloat? = nil) -> Constrainer {
-        if let to = to {
-            append(constraint: view[keyPath: path].constraint(equalToConstant: to))
-            setPendingConstants(to: to)
-        } else {
-            pendingConstants.append(path)
+        return set([path], to: to)
+    }
+
+    @discardableResult
+    func set(_ paths: [KeyPath<UIView, NSLayoutDimension>], to: CGFloat? = nil) -> Constrainer {
+        paths.forEach {
+            if let to = to {
+                append(constraint: view[keyPath: $0].constraint(equalToConstant: to))
+                setPendingConstants(to: to)
+            } else {
+                pendingConstants.append($0)
+            }
         }
         return self
     }
@@ -118,6 +117,10 @@ extension UIView {
 
         if constrainer.hasConstraints {
             constrainer.activate()
+        }
+
+        if constrainer.hasPendingConstraints {
+            assertionFailure("Not all constraints have been activated. Ensure Constrainer has value to pin or set to.")
         }
     }
 }

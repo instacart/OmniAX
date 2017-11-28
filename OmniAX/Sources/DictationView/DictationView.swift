@@ -50,10 +50,9 @@ final class DictationView: UIView {
         dictateButton.constrain() {
             let widthHeight = DictationView.buttonWidthHeight
 
-            $0.pin(\.centerXAnchor)
-                .pin(\.centerYAnchor, to: self)
-                .set(\.heightAnchor)
-                .set(\.widthAnchor, to: widthHeight)
+            $0.pinToSuperview(\UIView.centerXAnchor)
+                .pinToSuperview(\UIView.centerYAnchor)
+                .set([\.heightAnchor, \.widthAnchor], to: widthHeight)
         }
     }
 
