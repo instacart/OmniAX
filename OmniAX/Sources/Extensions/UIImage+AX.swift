@@ -24,9 +24,9 @@ extension UIImage {
         let rect = CGRect(origin: .zero, size: size)
 
         UIGraphicsBeginImageContextWithOptions(rect.size, false, scale)
+        defer { UIGraphicsEndImageContext() }
 
         guard let context = UIGraphicsGetCurrentContext() else {
-            UIGraphicsEndImageContext()
             return self
         }
 
@@ -36,11 +36,7 @@ extension UIImage {
         context.setBlendMode(.sourceAtop)
         context.fill(rect)
 
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-
-        UIGraphicsEndImageContext()
-
-        return image ?? self
+        return UIGraphicsGetImageFromCurrentImageContext() ?? self
     }
 }
 
