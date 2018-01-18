@@ -25,14 +25,19 @@
 		229039811FAE88CF0038989B /* DictationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397C1FAE88CF0038989B /* DictationView.swift */; };
 		229039821FAE88CF0038989B /* DictationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397D1FAE88CF0038989B /* DictationViewController.swift */; };
 		229039831FAE88CF0038989B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290397E1FAE88CF0038989B /* Output.swift */; };
+		22951EDD1FB2E530002DFF78 /* Dispatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22951EDC1FB2E530002DFF78 /* Dispatchable.swift */; };
+		22951EE11FB35649002DFF78 /* DictationReferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22951EE01FB35649002DFF78 /* DictationReferenceManager.swift */; };
+		2297164D1FB27BD700296910 /* WrappedHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297164C1FB27BD700296910 /* WrappedHashable.swift */; };
+		2297164F1FB27BF900296910 /* ManagedReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297164E1FB27BF900296910 /* ManagedReference.swift */; };
+		229716511FB27C3600296910 /* ReferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229716501FB27C3600296910 /* ReferenceManager.swift */; };
 		22AB4F5B1F84103A00D3BDA9 /* OmniAX.h in Headers */ = {isa = PBXBuildFile; fileRef = 22AB4F591F84103A00D3BDA9 /* OmniAX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		22AB4F7B1F8459CD00D3BDA9 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F721F8459CD00D3BDA9 /* Notification.swift */; };
+		22AB4F7B1F8459CD00D3BDA9 /* AXNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F721F8459CD00D3BDA9 /* AXNotification.swift */; };
 		22AB4F7C1F8459CD00D3BDA9 /* Sequence+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */; };
 		22AB4F7D1F8459CD00D3BDA9 /* String+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F751F8459CD00D3BDA9 /* String+AX.swift */; };
-		22AB4F7E1F8459CD00D3BDA9 /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F761F8459CD00D3BDA9 /* Features.swift */; };
-		22AB4F7F1F8459CD00D3BDA9 /* Traits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F771F8459CD00D3BDA9 /* Traits.swift */; };
+		22AB4F7E1F8459CD00D3BDA9 /* AXFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F761F8459CD00D3BDA9 /* AXFeatures.swift */; };
+		22AB4F7F1F8459CD00D3BDA9 /* AXTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F771F8459CD00D3BDA9 /* AXTraits.swift */; };
 		22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F781F8459CD00D3BDA9 /* AX.swift */; };
-		22AB4F811F8459CD00D3BDA9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F791F8459CD00D3BDA9 /* Message.swift */; };
+		22AB4F811F8459CD00D3BDA9 /* AXMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F791F8459CD00D3BDA9 /* AXMessage.swift */; };
 		22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,16 +60,22 @@
 		2290397C1FAE88CF0038989B /* DictationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationView.swift; sourceTree = "<group>"; };
 		2290397D1FAE88CF0038989B /* DictationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationViewController.swift; sourceTree = "<group>"; };
 		2290397E1FAE88CF0038989B /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		22951EDC1FB2E530002DFF78 /* Dispatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatchable.swift; sourceTree = "<group>"; };
+		22951EE01FB35649002DFF78 /* DictationReferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationReferenceManager.swift; sourceTree = "<group>"; };
+		22951EE51FB35704002DFF78 /* Usage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Usage.md; sourceTree = "<group>"; };
+		2297164C1FB27BD700296910 /* WrappedHashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedHashable.swift; sourceTree = "<group>"; };
+		2297164E1FB27BF900296910 /* ManagedReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedReference.swift; sourceTree = "<group>"; };
+		229716501FB27C3600296910 /* ReferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceManager.swift; sourceTree = "<group>"; };
 		22AB4F561F84103A00D3BDA9 /* OmniAX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmniAX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB4F591F84103A00D3BDA9 /* OmniAX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniAX.h; sourceTree = "<group>"; };
 		22AB4F5A1F84103A00D3BDA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22AB4F721F8459CD00D3BDA9 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		22AB4F721F8459CD00D3BDA9 /* AXNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXNotification.swift; sourceTree = "<group>"; };
 		22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+AX.swift"; sourceTree = "<group>"; };
 		22AB4F751F8459CD00D3BDA9 /* String+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+AX.swift"; sourceTree = "<group>"; };
-		22AB4F761F8459CD00D3BDA9 /* Features.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
-		22AB4F771F8459CD00D3BDA9 /* Traits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Traits.swift; sourceTree = "<group>"; };
+		22AB4F761F8459CD00D3BDA9 /* AXFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXFeatures.swift; sourceTree = "<group>"; };
+		22AB4F771F8459CD00D3BDA9 /* AXTraits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXTraits.swift; sourceTree = "<group>"; };
 		22AB4F781F8459CD00D3BDA9 /* AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AX.swift; sourceTree = "<group>"; };
-		22AB4F791F8459CD00D3BDA9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		22AB4F791F8459CD00D3BDA9 /* AXMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXMessage.swift; sourceTree = "<group>"; };
 		22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationTransformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,14 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		221E37401FAE13B9005F0E13 /* Supporting Files */ = {
+		221E37401FAE13B9005F0E13 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				223BE58F1FAE8A530012FFD6 /* Images.xcassets */,
 				22AB4F591F84103A00D3BDA9 /* OmniAX.h */,
 				22AB4F5A1F84103A00D3BDA9 /* Info.plist */,
 			);
-			path = "Supporting Files";
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		221E37431FAE1CC2005F0E13 /* AXCompatible */ = {
@@ -101,25 +112,79 @@
 			path = AXCompatible;
 			sourceTree = "<group>";
 		};
-		223BE58C1FAE89580012FFD6 /* Autolayout */ = {
+		223BE58C1FAE89580012FFD6 /* Auto Layout */ = {
 			isa = PBXGroup;
 			children = (
 				223BE58D1FAE89580012FFD6 /* Constrainer.swift */,
 			);
-			path = Autolayout;
+			path = "Auto Layout";
 			sourceTree = "<group>";
 		};
 		229039791FAE88CF0038989B /* DictationView */ = {
 			isa = PBXGroup;
 			children = (
+				22951EDC1FB2E530002DFF78 /* Dispatchable.swift */,
+				2290397E1FAE88CF0038989B /* Output.swift */,
 				2290397A1FAE88CF0038989B /* AudioPlayer.swift */,
 				2290397B1FAE88CF0038989B /* DictationManager.swift */,
 				2290397C1FAE88CF0038989B /* DictationView.swift */,
 				2290397D1FAE88CF0038989B /* DictationViewController.swift */,
-				224D40F71FB02BC00041A950 /* LoadingLayer.swift */,
-				2290397E1FAE88CF0038989B /* Output.swift */,
+				22951EE01FB35649002DFF78 /* DictationReferenceManager.swift */,
 			);
 			path = DictationView;
+			sourceTree = "<group>";
+		};
+		22951EDB1FB2E514002DFF78 /* ManagedReference */ = {
+			isa = PBXGroup;
+			children = (
+				2297164C1FB27BD700296910 /* WrappedHashable.swift */,
+				2297164E1FB27BF900296910 /* ManagedReference.swift */,
+				229716501FB27C3600296910 /* ReferenceManager.swift */,
+			);
+			path = ManagedReference;
+			sourceTree = "<group>";
+		};
+		22951EE21FB35662002DFF78 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				22951EE31FB3569A002DFF78 /* Core */,
+				22951EE61FB35746002DFF78 /* UI */,
+				221E37431FAE1CC2005F0E13 /* AXCompatible */,
+				229039791FAE88CF0038989B /* DictationView */,
+				22951EDB1FB2E514002DFF78 /* ManagedReference */,
+				22AB4F731F8459CD00D3BDA9 /* Extensions */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		22951EE31FB3569A002DFF78 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */,
+				22AB4F781F8459CD00D3BDA9 /* AX.swift */,
+				22AB4F761F8459CD00D3BDA9 /* AXFeatures.swift */,
+				22AB4F791F8459CD00D3BDA9 /* AXMessage.swift */,
+				22AB4F721F8459CD00D3BDA9 /* AXNotification.swift */,
+				22AB4F771F8459CD00D3BDA9 /* AXTraits.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		22951EE41FB356D6002DFF78 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				22951EE51FB35704002DFF78 /* Usage.md */,
+			);
+			path = Docs;
+			sourceTree = "<group>";
+		};
+		22951EE61FB35746002DFF78 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				223BE58C1FAE89580012FFD6 /* Auto Layout */,
+				224D40F71FB02BC00041A950 /* LoadingLayer.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		22AB4F4C1F84103A00D3BDA9 = {
@@ -141,17 +206,9 @@
 		22AB4F581F84103A00D3BDA9 /* OmniAX */ = {
 			isa = PBXGroup;
 			children = (
-				22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */,
-				22AB4F781F8459CD00D3BDA9 /* AX.swift */,
-				223BE58C1FAE89580012FFD6 /* Autolayout */,
-				221E37431FAE1CC2005F0E13 /* AXCompatible */,
-				229039791FAE88CF0038989B /* DictationView */,
-				22AB4F731F8459CD00D3BDA9 /* Extensions */,
-				22AB4F761F8459CD00D3BDA9 /* Features.swift */,
-				22AB4F791F8459CD00D3BDA9 /* Message.swift */,
-				22AB4F721F8459CD00D3BDA9 /* Notification.swift */,
-				22AB4F771F8459CD00D3BDA9 /* Traits.swift */,
-				221E37401FAE13B9005F0E13 /* Supporting Files */,
+				22951EE41FB356D6002DFF78 /* Docs */,
+				22951EE21FB35662002DFF78 /* Sources */,
+				221E37401FAE13B9005F0E13 /* SupportingFiles */,
 			);
 			path = OmniAX;
 			sourceTree = "<group>";
@@ -257,25 +314,30 @@
 				223BE5931FAE8E3A0012FFD6 /* AXCompatible.swift in Sources */,
 				223BE5951FAE8E3A0012FFD6 /* AXCompatible+UIView.swift in Sources */,
 				223BE5941FAE8E3A0012FFD6 /* AXCompatible+Text.swift in Sources */,
-				22AB4F7E1F8459CD00D3BDA9 /* Features.swift in Sources */,
+				22AB4F7E1F8459CD00D3BDA9 /* AXFeatures.swift in Sources */,
 				223BE58A1FAE89390012FFD6 /* UIImage+AX.swift in Sources */,
 				22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */,
-				22AB4F7B1F8459CD00D3BDA9 /* Notification.swift in Sources */,
+				22AB4F7B1F8459CD00D3BDA9 /* AXNotification.swift in Sources */,
 				22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */,
+				2297164D1FB27BD700296910 /* WrappedHashable.swift in Sources */,
 				223BE5961FAE8E3A0012FFD6 /* AXCompatible+NSObject.swift in Sources */,
 				223BE5851FAE89300012FFD6 /* CGFloat+AX.swift in Sources */,
+				229716511FB27C3600296910 /* ReferenceManager.swift in Sources */,
 				22AB4F7D1F8459CD00D3BDA9 /* String+AX.swift in Sources */,
 				223BE5921FAE8DCC0012FFD6 /* AXCompatible+UIFont.swift in Sources */,
 				229039821FAE88CF0038989B /* DictationViewController.swift in Sources */,
-				22AB4F7F1F8459CD00D3BDA9 /* Traits.swift in Sources */,
+				22AB4F7F1F8459CD00D3BDA9 /* AXTraits.swift in Sources */,
+				22951EE11FB35649002DFF78 /* DictationReferenceManager.swift in Sources */,
 				223BE5891FAE89390012FFD6 /* UIFont+AX.swift in Sources */,
 				2290397F1FAE88CF0038989B /* AudioPlayer.swift in Sources */,
 				22689B4B1F853FB50044A8CE /* Notification+AX.swift in Sources */,
 				223BE58E1FAE89580012FFD6 /* Constrainer.swift in Sources */,
 				22AB4F7C1F8459CD00D3BDA9 /* Sequence+AX.swift in Sources */,
-				22AB4F811F8459CD00D3BDA9 /* Message.swift in Sources */,
+				22AB4F811F8459CD00D3BDA9 /* AXMessage.swift in Sources */,
+				2297164F1FB27BF900296910 /* ManagedReference.swift in Sources */,
 				229039801FAE88CF0038989B /* DictationManager.swift in Sources */,
 				223BE58B1FAE89390012FFD6 /* UIView+AX.swift in Sources */,
+				22951EDD1FB2E530002DFF78 /* Dispatchable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

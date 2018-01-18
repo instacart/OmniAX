@@ -18,7 +18,10 @@ extension String {
 
 extension Optional where Wrapped == String {
     var isBlank: Bool {
-        return self?.isBlank ?? true
+        if let string = self {
+            return string.isBlank
+        }
+        return true
     }
 }
 

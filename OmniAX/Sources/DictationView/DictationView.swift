@@ -17,17 +17,13 @@ final class DictationView: UIView {
         $0.accessibilityHint = NSLocalizedString("Press to dictate", comment: "")
     }
 
-    weak var delegate: AXDictationDelegate?
-
     private lazy var borderLayer: CALayer = {
         let layer = CALayer()
         layer.backgroundColor = UIColor.gray.cgColor
         return layer
     }()
 
-    private lazy var loadingLayer: LoadingLayer = {
-        return LoadingLayer()
-    }()
+    private lazy var loadingLayer: LoadingLayer = .init()
 
     private static let buttonWidthHeight: CGFloat = 50
 
@@ -52,10 +48,9 @@ final class DictationView: UIView {
         dictateButton.constrain() {
             let widthHeight = DictationView.buttonWidthHeight
 
-            $0.pin(\.centerXAnchor)
-                .pin(\.centerYAnchor, to: self)
-                .set(\.heightAnchor)
-                .set(\.widthAnchor, to: widthHeight)
+            $0.pinToSuperview(\UIView.centerXAnchor)
+                .pinToSuperview(\UIView.centerYAnchor)
+                .set([\.heightAnchor, \.widthAnchor], to: widthHeight)
         }
     }
 

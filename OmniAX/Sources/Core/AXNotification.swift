@@ -1,12 +1,12 @@
 //
-//  Notification.swift
+//  AXNotification.swift
 //  OmniAX
 //
 //  Created by Dan Loman on 10/3/17.
 //  Copyright © 2017 Dan Loman. All rights reserved.
 //
 
-public enum Notification {
+public enum AXNotification {
     case announcement
     case layoutChanged
     case pageScrolled

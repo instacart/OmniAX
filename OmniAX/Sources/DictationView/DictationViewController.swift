@@ -9,21 +9,8 @@
 import UIKit
 import Speech
 
-@available(iOS 10.0, *)
-extension Output where A == String {
-    static func handle(output: @escaping OutputHandler<String>) -> ((SFSpeechRecognitionResult?, Error?) -> Void) {
-        return { result, error in
-            if let result = result {
-                output(.success(result.bestTranscription.formattedString))
-            } else if let error = error {
-                output(.failure(error))
-            }
-        }
-    }
-}
-
-public protocol AXDictationDelegate: class {
-    func dispatch(result: Output<String>)
+public protocol DictationDelegate: class {
+    func dispatch(output: Output<String>)
 }
 
 @available(iOS 10.0, *)
@@ -32,13 +19,9 @@ final class DictationViewController: UIViewController {
         $0.dictateButton.addTarget(self, action: #selector(didTapDictate(sender:)), for: .touchUpInside)
     }
 
-    private weak var delegate: AXDictationDelegate? {
-        return dictationView.delegate
-    }
-
-    private lazy var dictationManager: DictationManager = {
-        return DictationManager()
-    }()
+    fileprivate lazy var dictationManager: DictationManager = .init()
+    
+    private var outputManager: DictationReferenceManager = .init()
 
     override func loadView() {
         view = dictationView
@@ -56,7 +39,7 @@ final class DictationViewController: UIViewController {
             case .success:
                 break
             }
-            self?.delegate?.dispatch(result: $0)
+            self?.outputManager.dispatch(output: $0)
         }
     }
 
@@ -64,6 +47,10 @@ final class DictationViewController: UIViewController {
         super.viewDidAppear(animated)
 
         checkAccess()
+    }
+
+    func add(delegate: DictationDelegate?) -> ManagedReference {
+        return outputManager.add(WrappedHashable(delegate as AnyObject))
     }
 
     @objc private func didTapDictate(sender: UIButton) {
@@ -82,5 +69,35 @@ final class DictationViewController: UIViewController {
                 self?.dictationView.dictateButton.isEnabled = state == .authorized
             }
         }
+    }
+}
+
+@available(iOS 10.0, *)
+extension AX {
+    fileprivate static let dictationViewController: DictationViewController = .init()
+
+    static func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> (UIView, ManagedReference) {
+        var width: CGFloat = UIScreen.main.bounds.width
+        
+        let controller = AX.dictationViewController
+
+        controller.view.removeFromSuperview()
+
+        if let parent = parent {
+            parent.addChildViewController(controller)
+            controller.didMove(toParentViewController: parent)
+
+            width = parent.view.bounds.width
+        }
+
+        controller.view.frame = CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: width,
+                height: 60
+            )
+        )
+
+        return (controller.view, controller.add(delegate: delegate))
     }
 }
