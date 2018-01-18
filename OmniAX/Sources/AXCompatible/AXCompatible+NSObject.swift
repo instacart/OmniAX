@@ -16,7 +16,12 @@ extension AXType where Root: NSObject {
     }
 
     public var customActions: [UIAccessibilityCustomAction]? {
-        return root.accessibilityCustomActions
+        get {
+            return root.accessibilityCustomActions
+        }
+        set {
+            root.accessibilityCustomActions = newValue
+        }
     }
     
     public func summarizeInSelf(elements: [NSObject?], inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
