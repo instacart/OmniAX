@@ -15,14 +15,8 @@ extension AXType where Root: NSObject {
         return AX.isFocused(element: root)
     }
 
-    public func add(customActions: [UIAccessibilityCustomAction], replace: Bool = false) {
-        if replace {
-            root.accessibilityCustomActions = customActions
-        } else {
-            var actionSet = (root.accessibilityCustomActions ?? []).set()
-            customActions.forEach({ actionSet.update(with: $0) })
-            root.accessibilityCustomActions = actionSet.array()
-        }
+    public var customActions: [UIAccessibilityCustomAction]? {
+        return root.accessibilityCustomActions
     }
     
     public func summarizeInSelf(elements: [NSObject?], inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
