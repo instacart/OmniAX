@@ -51,7 +51,7 @@
 		223BE5871FAE89390012FFD6 /* UIImage+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+AX.swift"; sourceTree = "<group>"; };
 		223BE5881FAE89390012FFD6 /* UIView+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AX.swift"; sourceTree = "<group>"; };
 		223BE58D1FAE89580012FFD6 /* Constrainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constrainer.swift; sourceTree = "<group>"; };
-		223BE58F1FAE8A530012FFD6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "OmniAX/Supporting Files/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		223BE58F1FAE8A530012FFD6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OmniAX/SupportingFiles/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		223BE5911FAE8DCC0012FFD6 /* AXCompatible+UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AXCompatible+UIFont.swift"; sourceTree = "<group>"; };
 		224D40F71FB02BC00041A950 /* LoadingLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLayer.swift; sourceTree = "<group>"; };
 		22689B4A1F853FB50044A8CE /* Notification+AX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+AX.swift"; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/OmniAX/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/OmniAX/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -499,7 +499,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/OmniAX/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/OmniAX/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
