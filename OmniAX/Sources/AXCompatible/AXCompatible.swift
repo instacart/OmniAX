@@ -18,19 +18,10 @@ extension AXCompatible {
     public var ax: AXType<Self> {
         return AXType(root: self)
     }
-
-    public var test: AXType<Self> {
-        get {
-            return AXType(root: self)
-        }
-        set {
-            test.root = newValue.root
-        }
-    }
 }
 
 public final class AXType<Root> {
-    fileprivate(set) var root: Root
+    let root: Root
     
     init(root: Root) {
         self.root = root
