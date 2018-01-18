@@ -228,6 +228,7 @@ public final class AX: NSObject {
 
     /// Summarize the accessibilityLabels from sub-elements into a parent element
     /// Useful for combining subviews into a more digestible accessibilty element
+    /// If summary accessibility text is not blank, sets elements isAccessibilityElement = true
     ///
     /// - Parameters:
     ///   - elements: Elements to summarize
