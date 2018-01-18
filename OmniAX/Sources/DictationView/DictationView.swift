@@ -23,9 +23,7 @@ final class DictationView: UIView {
         return layer
     }()
 
-    private lazy var loadingLayer: LoadingLayer = {
-        return LoadingLayer()
-    }()
+    private lazy var loadingLayer: LoadingLayer = .init()
 
     private static let buttonWidthHeight: CGFloat = 50
 

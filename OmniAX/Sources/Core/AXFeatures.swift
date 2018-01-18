@@ -1,30 +1,30 @@
 //
-//  AX+Features.swift
+//  AXFeatures.swift
 //  OmniAX
 //
 //  Created by Dan Loman on 10/3/17.
 //  Copyright © 2017 Dan Loman. All rights reserved.
 //
 
-public struct Features: OptionSet {
+public struct AXFeatures: OptionSet {
     public let rawValue: UInt64
 
     @available(iOS 10.0, *)
-    public static let assistiveTouch        = Features(rawValue: 1 << 0)
-    public static let boldText              = Features(rawValue: 1 << 1)
-    public static let closedCaptioning      = Features(rawValue: 1 << 2)
-    public static let darkerSystemColors    = Features(rawValue: 1 << 3)
-    public static let grayscale             = Features(rawValue: 1 << 4)
-    public static let guidedAccess          = Features(rawValue: 1 << 5)
-    public static let invertColors          = Features(rawValue: 1 << 6)
-    public static let monoAudio             = Features(rawValue: 1 << 7)
-    public static let reduceMotion          = Features(rawValue: 1 << 8)
-    public static let reduceTransparency    = Features(rawValue: 1 << 9)
-    public static let shakeToUndo           = Features(rawValue: 1 << 10)
-    public static let speakScreen           = Features(rawValue: 1 << 11)
-    public static let speakSelection        = Features(rawValue: 1 << 12)
-    public static let switchControl         = Features(rawValue: 1 << 13)
-    public static let voiceOver             = Features(rawValue: 1 << 14)
+    public static let assistiveTouch        = AXFeatures(rawValue: 1 << 0)
+    public static let boldText              = AXFeatures(rawValue: 1 << 1)
+    public static let closedCaptioning      = AXFeatures(rawValue: 1 << 2)
+    public static let darkerSystemColors    = AXFeatures(rawValue: 1 << 3)
+    public static let grayscale             = AXFeatures(rawValue: 1 << 4)
+    public static let guidedAccess          = AXFeatures(rawValue: 1 << 5)
+    public static let invertColors          = AXFeatures(rawValue: 1 << 6)
+    public static let monoAudio             = AXFeatures(rawValue: 1 << 7)
+    public static let reduceMotion          = AXFeatures(rawValue: 1 << 8)
+    public static let reduceTransparency    = AXFeatures(rawValue: 1 << 9)
+    public static let shakeToUndo           = AXFeatures(rawValue: 1 << 10)
+    public static let speakScreen           = AXFeatures(rawValue: 1 << 11)
+    public static let speakSelection        = AXFeatures(rawValue: 1 << 12)
+    public static let switchControl         = AXFeatures(rawValue: 1 << 13)
+    public static let voiceOver             = AXFeatures(rawValue: 1 << 14)
 
     public init(rawValue: UInt64) {
         self.rawValue = rawValue
@@ -106,8 +106,8 @@ public struct Features: OptionSet {
     }
 
     // NOTE: - Perhaps utilize this technique instead of manual array: https://forums.developer.apple.com/thread/16252
-    static var all: [Features] = {
-        var features: [Features] = [
+    static var all: [AXFeatures] = {
+        var features: [AXFeatures] = [
             .boldText,
             .closedCaptioning,
             .darkerSystemColors,

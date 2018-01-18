@@ -19,9 +19,7 @@ final class DictationViewController: UIViewController {
         $0.dictateButton.addTarget(self, action: #selector(didTapDictate(sender:)), for: .touchUpInside)
     }
 
-    fileprivate lazy var dictationManager: DictationManager = {
-        return DictationManager()
-    }()
+    fileprivate lazy var dictationManager: DictationManager = .init()
     
     private var outputManager = DictationReferenceManager()
 
@@ -50,8 +48,7 @@ final class DictationViewController: UIViewController {
 
         checkAccess()
     }
-    
-    
+
     func add(delegate: DictationDelegate?) -> ManagedReference {
         return outputManager.add(WrappedHashable(delegate as AnyObject))
     }
@@ -77,8 +74,8 @@ final class DictationViewController: UIViewController {
 
 @available(iOS 10.0, *)
 extension AX {
-    fileprivate static let dictationViewController = DictationViewController()
-    
+    fileprivate static let dictationViewController: DictationViewController = .init()
+
     static func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> (UIView, ManagedReference) {
         var width: CGFloat = UIScreen.main.bounds.width
         

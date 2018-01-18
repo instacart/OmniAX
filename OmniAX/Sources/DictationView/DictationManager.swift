@@ -11,9 +11,7 @@ import AudioToolbox
 
 @available(iOS 10.0, *)
 final class DictationManager {
-    private lazy var audioEngine: AVAudioEngine = {
-        return .init()
-    }()
+    private lazy var audioEngine: AVAudioEngine = .init()
 
     private var recognitionTask: SFSpeechRecognitionTask?
     private weak var timer: Timer?

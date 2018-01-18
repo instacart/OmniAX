@@ -12,11 +12,11 @@ public final class AX: NSObject {
 
     private static let defaultsForcedFeaturesKey = "com.OmniAX.userForceEnabledFeatures"
 
-    private var systemEnabledFeatures: Features = []
+    private var systemEnabledFeatures: AXFeatures = []
 
-    private var userForceEnabledFeatures: Features = []
+    private var userForceEnabledFeatures: AXFeatures = []
 
-    private var enabledFeatures: Features {
+    private var enabledFeatures: AXFeatures {
         return systemEnabledFeatures.union(userForceEnabledFeatures)
     }
 
@@ -28,24 +28,29 @@ public final class AX: NSObject {
         return customTransformer ?? _transformer
     }
 
-    private lazy var _transformer: AbbrevationTransformer = {
-        return Transformer()
-    }()
+    private lazy var _transformer: AbbrevationTransformer = Transformer()
 
     private var customTransformer: AbbrevationTransformer?
+
+    private var notificationTokens: [NotificationToken] = []
 
     /// Don't allow outside initialization of this class. Should be used through through it's static methods only
     private override init() {
         super.init()
 
         // Check system enabled features
-        Features.all.forEach({ observe(feature: $0) })
+        AXFeatures.all.forEach({ observe(feature: $0) })
 
         // Check for user forced defaults
         let forcedRawValue = UserDefaults.standard.integer(forKey: AX.defaultsForcedFeaturesKey)
         if forcedRawValue > 0 {
-            userForceEnabledFeatures = Features(rawValue: UInt64(forcedRawValue))
+            userForceEnabledFeatures = AXFeatures(rawValue: UInt64(forcedRawValue))
         }
+    }
+
+    deinit {
+        notificationTokens
+            .forEach({ NotificationCenter.default.removeObserver($0) })
     }
 
     // MARK: - Configuration
@@ -77,7 +82,7 @@ public final class AX: NSObject {
 
     // MARK: - Private
 
-    private static func checkEnabled(features: Features, checkType: Features.EnabledCheckType, within: Features) -> Bool {
+    private static func checkEnabled(features: AXFeatures, checkType: AXFeatures.EnabledCheckType, within: AXFeatures) -> Bool {
         switch checkType {
         case .all:
             return within.contains(features)
@@ -87,7 +92,7 @@ public final class AX: NSObject {
     }
 
     /// Performs a system check for enabled/disabled status of the included feature
-    private func checkSystemStatus(feature: Features) {
+    private func checkSystemStatus(feature: AXFeatures) {
         guard let enabled = feature.systemCheckEnabled else {
             return assertionFailure("Unknown/Unmapped feature")
         }
@@ -103,13 +108,18 @@ public final class AX: NSObject {
         UserDefaults.standard.synchronize()
     }
 
-    private func observe(feature: Features) {
+    private func observe(feature: AXFeatures) {
         // Intial check for enabled
         checkSystemStatus(feature: feature)
 
         // Observe
         if let notification = feature.statusChangedNotification {
-            notification.observe(onNext: { [weak self] _ in self?.checkSystemStatus(feature: feature) })
+            let token = notification.observe(
+                onNext: { [weak self] _ in
+                    self?.checkSystemStatus(feature: feature)
+                }
+            )
+            notificationTokens.append(token)
         } else {
             assertionFailure("Unmapped/Unknown feature")
         }
@@ -135,13 +145,13 @@ public final class AX: NSObject {
     }
 
     /// Adds/removes the same set of traits to all included elements
-    public static func toggle(traits: Traits, enabled: Bool = true, for elements: [NSObject?], forceAccessible flag: Bool? = nil) {
+    public static func toggle(traits: AXTraits, enabled: Bool = true, for elements: [NSObject?], forceAccessible flag: Bool? = nil) {
         elements.forEach({ toggle(traits: traits, enabled: enabled, for: $0, forceAccessible: flag) })
     }
 
     /// Adds or removes the included traits to/from the element
     /// Modify isAccessibilityElement value if force flag is non-nil
-    public static func toggle(traits: Traits, enabled: Bool = true, for element: NSObject?, forceAccessible flag: Bool? = nil) {
+    public static func toggle(traits: AXTraits, enabled: Bool = true, for element: NSObject?, forceAccessible flag: Bool? = nil) {
         guard let element = element else {
             return
         }
@@ -161,38 +171,38 @@ public final class AX: NSObject {
         }
     }
 
-    // MARK: - Features
+    // MARK: - AXFeatures
 
     /// Adds included AX features as forced options. (Example: in-app settings)
     /// checkEnabled(features:) will now return true for included features
     /// Note: - Will NOT enable UIAccessibility features. This is for your custom handling only
-    public static func addForced(features: Features) {
+    public static func addForced(features: AXFeatures) {
         AX.instance.userForceEnabledFeatures.insert(features)
         AX.instance.updateUserDefaults()
     }
 
     /// Removes included AX features from forced options. Defaults to system value
-    public static func removeForced(features: Features) {
+    public static func removeForced(features: AXFeatures) {
         AX.instance.userForceEnabledFeatures.remove(features)
         AX.instance.updateUserDefaults()
     }
 
-    /// Check to see if user's in-app settings have force enabled the included AX Features
+    /// Check to see if user's in-app settings have force enabled the included AX AXFeatures
     /// Defaults to check if ALL features enabled
-    public static func checkForceEnabled(features: Features, checkType: Features.EnabledCheckType = .all) -> Bool {
+    public static func checkForceEnabled(features: AXFeatures, checkType: AXFeatures.EnabledCheckType = .all) -> Bool {
         return checkEnabled(features: features, checkType: checkType, within: AX.instance.userForceEnabledFeatures)
     }
 
     /// Returns Bool value indication if the included features are enabled
     /// Defaults to check if *ALL* features are enabled
-    public static func checkEnabled(features: Features, checkType: Features.EnabledCheckType = .all) -> Bool {
+    public static func checkEnabled(features: AXFeatures, checkType: AXFeatures.EnabledCheckType = .all) -> Bool {
         return checkEnabled(features: features, checkType: checkType, within: AX.instance.enabledFeatures)
     }
 
     // MARK: - Notifications/Announcements
 
     /// Post an accessibility notification, focusing on/announcing the included focus item
-    public static func post(notification: Notification, focus: Any?) {
+    public static func post(notification: AXNotification, focus: Any?) {
         guard !notification.isVoiceOverSpecific || voiceOverEnabled else {
             return
         }
@@ -210,7 +220,7 @@ public final class AX: NSObject {
     }
 
     /// Convenience: Post an accessibility announcement notification, reading the included preset message
-    public static func announce(message: Message) {
+    public static func announce(message: AXMessage) {
         announce(message: message)
     }
 
