@@ -21,7 +21,7 @@ final class DictationViewController: UIViewController {
 
     fileprivate lazy var dictationManager: DictationManager = .init()
     
-    private var outputManager = DictationReferenceManager()
+    private var outputManager: DictationReferenceManager = .init()
 
     override func loadView() {
         view = dictationView

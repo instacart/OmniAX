@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public final class ManagedReference {
     private let wrapped: WrappedHashable<AnyObject>
     private weak var manager: ReferenceManager?
