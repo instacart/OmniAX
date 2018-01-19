@@ -20,7 +20,7 @@ extension AXCompatible {
     }
 }
 
-public struct AXType<Root> {
+public final class AXType<Root> {
     let root: Root
     
     init(root: Root) {
