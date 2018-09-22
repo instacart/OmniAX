@@ -9,7 +9,7 @@
 import Foundation
 
 extension AXType where Root: UIFont {
-    public func dynamicallyScaled(style: UIFontTextStyle = .headline) -> UIFont {
+    public func dynamicallyScaled(style: UIFont.TextStyle = .headline) -> UIFont {
         return root.scaled(style: style)
     }
 }

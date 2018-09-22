@@ -14,13 +14,13 @@ final class LoadingLayer: CAShapeLayer {
         start.toValue = 1
         start.duration = 1
         start.beginTime = 0.25
-        start.fillMode = kCAFillModeForwards
-        start.timingFunction = .init(name: kCAMediaTimingFunctionEaseInEaseOut)
+        start.fillMode = .forwards
+        start.timingFunction = .init(name: .easeInEaseOut)
         
         let end = CABasicAnimation(keyPath: "strokeEnd")
         end.toValue = 1
         end.duration = 1
-        end.fillMode = kCAFillModeForwards
+        end.fillMode = .forwards
         
         let group = CAAnimationGroup()
         group.animations = [start, end]

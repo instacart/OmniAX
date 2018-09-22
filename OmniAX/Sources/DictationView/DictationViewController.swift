@@ -13,7 +13,6 @@ public protocol DictationDelegate: class {
     func dispatch(output: Output<String>)
 }
 
-@available(iOS 10.0, *)
 final class DictationViewController: UIViewController {
     private(set) var dictationView: DictationView = ._init() {
         $0.dictateButton.addTarget(self, action: #selector(didTapDictate(sender:)), for: .touchUpInside)
@@ -72,7 +71,6 @@ final class DictationViewController: UIViewController {
     }
 }
 
-@available(iOS 10.0, *)
 extension AX {
     fileprivate static let dictationViewController: DictationViewController = .init()
 
@@ -84,8 +82,8 @@ extension AX {
         controller.view.removeFromSuperview()
 
         if let parent = parent {
-            parent.addChildViewController(controller)
-            controller.didMove(toParentViewController: parent)
+            parent.addChild(controller)
+            controller.didMove(toParent: parent)
 
             width = parent.view.bounds.width
         }

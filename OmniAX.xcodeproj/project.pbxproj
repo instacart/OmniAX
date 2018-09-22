@@ -31,11 +31,10 @@
 		2297164F1FB27BF900296910 /* ManagedReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297164E1FB27BF900296910 /* ManagedReference.swift */; };
 		229716511FB27C3600296910 /* ReferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229716501FB27C3600296910 /* ReferenceManager.swift */; };
 		22AB4F5B1F84103A00D3BDA9 /* OmniAX.h in Headers */ = {isa = PBXBuildFile; fileRef = 22AB4F591F84103A00D3BDA9 /* OmniAX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		22AB4F7B1F8459CD00D3BDA9 /* AXNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F721F8459CD00D3BDA9 /* AXNotification.swift */; };
+		22AB4F7B1F8459CD00D3BDA9 /* UIAccessibility.Notification+OmniAX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F721F8459CD00D3BDA9 /* UIAccessibility.Notification+OmniAX.swift */; };
 		22AB4F7C1F8459CD00D3BDA9 /* Sequence+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */; };
 		22AB4F7D1F8459CD00D3BDA9 /* String+AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F751F8459CD00D3BDA9 /* String+AX.swift */; };
 		22AB4F7E1F8459CD00D3BDA9 /* AXFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F761F8459CD00D3BDA9 /* AXFeatures.swift */; };
-		22AB4F7F1F8459CD00D3BDA9 /* AXTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F771F8459CD00D3BDA9 /* AXTraits.swift */; };
 		22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F781F8459CD00D3BDA9 /* AX.swift */; };
 		22AB4F811F8459CD00D3BDA9 /* AXMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F791F8459CD00D3BDA9 /* AXMessage.swift */; };
 		22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */; };
@@ -69,11 +68,10 @@
 		22AB4F561F84103A00D3BDA9 /* OmniAX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmniAX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB4F591F84103A00D3BDA9 /* OmniAX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniAX.h; sourceTree = "<group>"; };
 		22AB4F5A1F84103A00D3BDA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22AB4F721F8459CD00D3BDA9 /* AXNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXNotification.swift; sourceTree = "<group>"; };
+		22AB4F721F8459CD00D3BDA9 /* UIAccessibility.Notification+OmniAX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAccessibility.Notification+OmniAX.swift"; sourceTree = "<group>"; };
 		22AB4F741F8459CD00D3BDA9 /* Sequence+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+AX.swift"; sourceTree = "<group>"; };
 		22AB4F751F8459CD00D3BDA9 /* String+AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+AX.swift"; sourceTree = "<group>"; };
 		22AB4F761F8459CD00D3BDA9 /* AXFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXFeatures.swift; sourceTree = "<group>"; };
-		22AB4F771F8459CD00D3BDA9 /* AXTraits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXTraits.swift; sourceTree = "<group>"; };
 		22AB4F781F8459CD00D3BDA9 /* AX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AX.swift; sourceTree = "<group>"; };
 		22AB4F791F8459CD00D3BDA9 /* AXMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXMessage.swift; sourceTree = "<group>"; };
 		22AB4F7A1F8459CD00D3BDA9 /* AbbreviationTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationTransformer.swift; sourceTree = "<group>"; };
@@ -164,8 +162,6 @@
 				22AB4F781F8459CD00D3BDA9 /* AX.swift */,
 				22AB4F761F8459CD00D3BDA9 /* AXFeatures.swift */,
 				22AB4F791F8459CD00D3BDA9 /* AXMessage.swift */,
-				22AB4F721F8459CD00D3BDA9 /* AXNotification.swift */,
-				22AB4F771F8459CD00D3BDA9 /* AXTraits.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -216,6 +212,7 @@
 		22AB4F731F8459CD00D3BDA9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				22AB4F721F8459CD00D3BDA9 /* UIAccessibility.Notification+OmniAX.swift */,
 				223BE5861FAE89390012FFD6 /* UIFont+AX.swift */,
 				223BE5871FAE89390012FFD6 /* UIImage+AX.swift */,
 				223BE5881FAE89390012FFD6 /* UIView+AX.swift */,
@@ -265,7 +262,7 @@
 		22AB4F4D1F84103A00D3BDA9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Dan Loman";
 				TargetAttributes = {
 					22AB4F551F84103A00D3BDA9 = {
@@ -317,7 +314,7 @@
 				22AB4F7E1F8459CD00D3BDA9 /* AXFeatures.swift in Sources */,
 				223BE58A1FAE89390012FFD6 /* UIImage+AX.swift in Sources */,
 				22AB4F821F8459CD00D3BDA9 /* AbbreviationTransformer.swift in Sources */,
-				22AB4F7B1F8459CD00D3BDA9 /* AXNotification.swift in Sources */,
+				22AB4F7B1F8459CD00D3BDA9 /* UIAccessibility.Notification+OmniAX.swift in Sources */,
 				22AB4F801F8459CD00D3BDA9 /* AX.swift in Sources */,
 				2297164D1FB27BD700296910 /* WrappedHashable.swift in Sources */,
 				223BE5961FAE8E3A0012FFD6 /* AXCompatible+NSObject.swift in Sources */,
@@ -326,7 +323,6 @@
 				22AB4F7D1F8459CD00D3BDA9 /* String+AX.swift in Sources */,
 				223BE5921FAE8DCC0012FFD6 /* AXCompatible+UIFont.swift in Sources */,
 				229039821FAE88CF0038989B /* DictationViewController.swift in Sources */,
-				22AB4F7F1F8459CD00D3BDA9 /* AXTraits.swift in Sources */,
 				22951EE11FB35649002DFF78 /* DictationReferenceManager.swift in Sources */,
 				223BE5891FAE89390012FFD6 /* UIFont+AX.swift in Sources */,
 				2290397F1FAE88CF0038989B /* AudioPlayer.swift in Sources */,
@@ -358,6 +354,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -365,6 +362,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -393,13 +391,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -419,6 +417,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -426,6 +425,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -448,11 +448,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -474,14 +474,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/OmniAX/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = namolnad.OmniAX;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -501,12 +501,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/OmniAX/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = namolnad.OmniAX;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -62,9 +62,6 @@ public extension AXType where Root: UITextField {
 
 fileprivate extension AXType {
     func dictationView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> (UIView, ManagedReference)? {
-        guard #available(iOS 10.0, *) else {
-            return nil
-        }
         return AX.dictationInputAccessoryView(parent: parent, delegate: delegate)
     }
 }
