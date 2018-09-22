@@ -9,7 +9,6 @@
 public struct AXFeatures: OptionSet {
     public let rawValue: UInt64
 
-    @available(iOS 10.0, *)
     public static let assistiveTouch        = AXFeatures(rawValue: 1 << 0)
     public static let boldText              = AXFeatures(rawValue: 1 << 1)
     public static let closedCaptioning      = AXFeatures(rawValue: 1 << 2)
@@ -31,103 +30,93 @@ public struct AXFeatures: OptionSet {
     }
 
     var systemCheckEnabled: Bool? {
-        if #available(iOS 10.0, *), self == .assistiveTouch {
-            return UIAccessibilityIsAssistiveTouchRunning()
+        if self == .assistiveTouch {
+            return UIAccessibility.isAssistiveTouchRunning
         } else if self == .boldText {
-            return UIAccessibilityIsBoldTextEnabled()
+            return UIAccessibility.isBoldTextEnabled
         } else if self == .closedCaptioning {
-            return UIAccessibilityIsClosedCaptioningEnabled()
+            return UIAccessibility.isClosedCaptioningEnabled
         } else if self == .darkerSystemColors {
-            return UIAccessibilityDarkerSystemColorsEnabled()
+            return UIAccessibility.isDarkerSystemColorsEnabled
         } else if self == .grayscale {
-            return UIAccessibilityIsGrayscaleEnabled()
+            return UIAccessibility.isGrayscaleEnabled
         } else if self == .guidedAccess {
-            return UIAccessibilityIsGuidedAccessEnabled()
+            return UIAccessibility.isGuidedAccessEnabled
         } else if self == .invertColors {
-            return UIAccessibilityIsInvertColorsEnabled()
+            return UIAccessibility.isInvertColorsEnabled
         } else if self == .monoAudio {
-            return UIAccessibilityIsMonoAudioEnabled()
+            return UIAccessibility.isMonoAudioEnabled
         } else if self == .reduceMotion {
-            return UIAccessibilityIsReduceMotionEnabled()
+            return UIAccessibility.isReduceMotionEnabled
         } else if self == .reduceTransparency {
-            return UIAccessibilityIsReduceTransparencyEnabled()
+            return UIAccessibility.isReduceTransparencyEnabled
         } else if self == .shakeToUndo {
-            return UIAccessibilityIsShakeToUndoEnabled()
+            return UIAccessibility.isShakeToUndoEnabled
         } else if self == .speakScreen {
-            return UIAccessibilityIsSpeakScreenEnabled()
+            return UIAccessibility.isSpeakScreenEnabled
         } else if self == .speakSelection {
-            return UIAccessibilityIsSpeakSelectionEnabled()
+            return UIAccessibility.isSpeakSelectionEnabled
         } else if self == .switchControl {
-            return UIAccessibilityIsSwitchControlRunning()
+            return UIAccessibility.isSwitchControlRunning
         } else if self == .voiceOver {
-            return UIAccessibilityIsVoiceOverRunning()
+            return UIAccessibility.isVoiceOverRunning
         }
         return nil
     }
 
     var statusChangedNotification: Foundation.Notification.Name? {
-        if #available(iOS 10.0, *), self == .assistiveTouch {
-            return .UIAccessibilityAssistiveTouchStatusDidChange
+        if self == .assistiveTouch {
+            return UIAccessibility.assistiveTouchStatusDidChangeNotification
         } else if self == .boldText {
-            return .UIAccessibilityBoldTextStatusDidChange
+            return UIAccessibility.boldTextStatusDidChangeNotification
         } else if self == .closedCaptioning {
-            return .UIAccessibilityClosedCaptioningStatusDidChange
+            return UIAccessibility.closedCaptioningStatusDidChangeNotification
         } else if self == .darkerSystemColors {
-            return .UIAccessibilityDarkerSystemColorsStatusDidChange
+            return UIAccessibility.darkerSystemColorsStatusDidChangeNotification
         } else if self == .grayscale {
-            return .UIAccessibilityGrayscaleStatusDidChange
+            return UIAccessibility.grayscaleStatusDidChangeNotification
         } else if self == .guidedAccess {
-            return .UIAccessibilityGuidedAccessStatusDidChange
+            return UIAccessibility.guidedAccessStatusDidChangeNotification
         } else if self == .invertColors {
-            return .UIAccessibilityInvertColorsStatusDidChange
+            return UIAccessibility.invertColorsStatusDidChangeNotification
         } else if self == .monoAudio {
-            return .UIAccessibilityMonoAudioStatusDidChange
+            return UIAccessibility.monoAudioStatusDidChangeNotification
         } else if self == .reduceMotion {
-            return .UIAccessibilityReduceMotionStatusDidChange
+            return UIAccessibility.reduceMotionStatusDidChangeNotification
         } else if self == .reduceTransparency {
-            return .UIAccessibilityReduceTransparencyStatusDidChange
+            return UIAccessibility.reduceTransparencyStatusDidChangeNotification
         } else if self == .shakeToUndo {
-            return .UIAccessibilityShakeToUndoDidChange
+            return UIAccessibility.shakeToUndoDidChangeNotification
         } else if self == .speakScreen {
-            return .UIAccessibilitySpeakScreenStatusDidChange
+            return UIAccessibility.speakScreenStatusDidChangeNotification
         } else if self == .speakSelection {
-            return .UIAccessibilitySpeakSelectionStatusDidChange
+            return UIAccessibility.speakSelectionStatusDidChangeNotification
         } else if self == .switchControl {
-            return .UIAccessibilitySwitchControlStatusDidChange
+            return UIAccessibility.switchControlStatusDidChangeNotification
         } else if self == .voiceOver {
-// NOTE: - Compilation issue even with #available() check. Commenting until bump up of deployment target
-//            if #available(iOS 11.0, *) {
-//                return .UIAccessibilityVoiceOverStatusDidChange
-//            } else {
-                return .init(rawValue: UIAccessibilityVoiceOverStatusChanged)
-//            }
+            return UIAccessibility.voiceOverStatusDidChangeNotification
         }
         return nil
     }
 
     // NOTE: - Perhaps utilize this technique instead of manual array: https://forums.developer.apple.com/thread/16252
-    static var all: [AXFeatures] = {
-        var features: [AXFeatures] = [
-            .boldText,
-            .closedCaptioning,
-            .darkerSystemColors,
-            .grayscale,
-            .guidedAccess,
-            .invertColors,
-            .monoAudio,
-            .reduceMotion,
-            .reduceTransparency,
-            .shakeToUndo,
-            .speakScreen,
-            .speakSelection,
-            .switchControl,
-            .voiceOver
-        ]
-        if #available(iOS 10.0, *) {
-            features.append(.assistiveTouch)
-        }
-        return features
-    }()
+    static var all: [AXFeatures] = [
+        .assistiveTouch,
+        .boldText,
+        .closedCaptioning,
+        .darkerSystemColors,
+        .grayscale,
+        .guidedAccess,
+        .invertColors,
+        .monoAudio,
+        .reduceMotion,
+        .reduceTransparency,
+        .shakeToUndo,
+        .speakScreen,
+        .speakSelection,
+        .switchControl,
+        .voiceOver
+    ]
 
     public enum EnabledCheckType {
         case any

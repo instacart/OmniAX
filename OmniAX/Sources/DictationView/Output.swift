@@ -17,7 +17,6 @@ public enum Output<A> {
     case failure(Error)
 }
 
-@available(iOS 10.0, *)
 extension Output where A == String {
     static func handle(output: @escaping OutputHandler<String>) -> ((SFSpeechRecognitionResult?, Error?) -> Void) {
         return { result, error in

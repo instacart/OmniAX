@@ -9,18 +9,18 @@
 import Foundation
 
 extension UIFont {
-    func scaled(style: UIFontTextStyle = .headline) -> UIFont {
-        let size = fontDescriptor.fontAttributes[UIFontDescriptorSizeAttribute] as? CGFloat ?? pointSize
+    func scaled(style: UIFont.TextStyle = .headline) -> UIFont {
+        let size = fontDescriptor.fontAttributes[.size] as? CGFloat ?? pointSize
 
-        let attributes: [String: Any] = [
-            UIFontDescriptorSizeAttribute: scaled(fontSize: size, style: .headline)
+        let attributes: [UIFontDescriptor.AttributeName: Any] = [
+            .size: scaled(fontSize: size, style: .headline)
         ]
 
         return UIFont(descriptor: fontDescriptor.addingAttributes(attributes), size: 0)
     }
 
     // Default to headline style to prevent massive sizes from making unoptimized apps unusable
-    private func scaled(fontSize: CGFloat, style: UIFontTextStyle = .headline) -> CGFloat {
+    private func scaled(fontSize: CGFloat, style: UIFont.TextStyle = .headline) -> CGFloat {
         let systemSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: style).pointSize
 
         guard systemSize != style.defaultSize else {
@@ -31,7 +31,7 @@ extension UIFont {
     }
  }
 
-private extension UIFontTextStyle {
+private extension UIFont.TextStyle {
     var defaultSize: CGFloat {
         switch self {
         case .body:
@@ -46,6 +46,8 @@ private extension UIFontTextStyle {
             return 13
         case .headline:
             return 17
+        case .largeTitle:
+            return 34
         case .subheadline:
             return 15
         case .title1:
@@ -55,9 +57,6 @@ private extension UIFontTextStyle {
         case .title3:
             return 20
         default:
-            if #available(iOS 11.0, *), self == .largeTitle {
-                return 34
-            }
             return 17
         }
     }

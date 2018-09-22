@@ -34,7 +34,7 @@ extension AXType where Root: NSObject {
         )
     }
 
-    public func toggle(traits: AXTraits, enabled: Bool = true, forceAccessible: Bool = true) {
+    public func toggle(traits: UIAccessibilityTraits, enabled: Bool = true, forceAccessible: Bool = true) {
         AX.toggle(
             traits: traits,
             enabled: enabled,

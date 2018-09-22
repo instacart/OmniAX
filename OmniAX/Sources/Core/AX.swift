@@ -145,24 +145,24 @@ public final class AX: NSObject {
     }
 
     /// Adds/removes the same set of traits to all included elements
-    public static func toggle(traits: AXTraits, enabled: Bool = true, for elements: [NSObject?], forceAccessible flag: Bool? = nil) {
+    public static func toggle(traits: UIAccessibilityTraits, enabled: Bool = true, for elements: [NSObject?], forceAccessible flag: Bool? = nil) {
         elements.forEach({ toggle(traits: traits, enabled: enabled, for: $0, forceAccessible: flag) })
     }
 
     /// Adds or removes the included traits to/from the element
     /// Modify isAccessibilityElement value if force flag is non-nil
-    public static func toggle(traits: AXTraits, enabled: Bool = true, for element: NSObject?, forceAccessible flag: Bool? = nil) {
+    public static func toggle(traits: UIAccessibilityTraits, enabled: Bool = true, for element: NSObject?, forceAccessible flag: Bool? = nil) {
         guard let element = element else {
             return
         }
 
         if traits == .none {
-            element.accessibilityTraits = traits.rawValue
+            element.accessibilityTraits = traits
         } else {
             if enabled {
-                element.accessibilityTraits |= traits.rawValue
+                element.accessibilityTraits.insert(traits)
             } else {
-                element.accessibilityTraits &= ~traits.rawValue
+                element.accessibilityTraits.remove(traits)
             }
         }
 
@@ -202,12 +202,12 @@ public final class AX: NSObject {
     // MARK: - Notifications/Announcements
 
     /// Post an accessibility notification, focusing on/announcing the included focus item
-    public static func post(notification: AXNotification, focus: Any?) {
+    public static func post(notification: UIAccessibility.Notification, focus: Any?) {
         guard !notification.isVoiceOverSpecific || voiceOverEnabled else {
             return
         }
 
-        UIAccessibilityPostNotification(notification.mappedValue, focus)
+        UIAccessibility.post(notification: notification, argument: focus)
     }
 
     /// Convenience: Post an accessibility announcement notification, reading the included message
@@ -245,7 +245,7 @@ public final class AX: NSObject {
         }
 
         let accessibilityText = elements
-            .flatMap({
+            .compactMap({
                 $0?.isAccessibilityElement = ($0 === element)
                 if excludeHidden, let view = $0 as? UIView {
                     return view.isHidden ? nil : view.accessibilityLabel
@@ -266,13 +266,13 @@ public final class AX: NSObject {
 
         if inheritTraits {
             elements
-                .flatMap({
+                .compactMap({
                     guard excludeHidden, let view = $0 as? UIView else {
                         return $0?.accessibilityTraits
                     }
                     return view.isHidden ? nil : view.accessibilityTraits
                 })
-                .forEach({ element.accessibilityTraits |= $0 })
+                .forEach({ element.accessibilityTraits.insert($0) })
         }
     }
 

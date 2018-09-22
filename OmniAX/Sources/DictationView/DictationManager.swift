@@ -9,7 +9,6 @@
 import Speech
 import AudioToolbox
 
-@available(iOS 10.0, *)
 final class DictationManager {
     private lazy var audioEngine: AVAudioEngine = .init()
 
@@ -72,15 +71,13 @@ final class DictationManager {
     }
 
     private func setupAudioNode() throws -> SFSpeechAudioBufferRecognitionRequest? {
-        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement, options: .allowBluetoothA2DP)
-        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .allowBluetoothA2DP)
+        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
 
-        guard let node = audioEngine.inputNode else {
-            return nil
-        }
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = true
 
+        let node = audioEngine.inputNode
         let format = node.outputFormat(forBus: nodeBus)
         node.installTap(onBus: nodeBus, bufferSize: 1024, format: format) { buffer, _ in
             request.append(buffer)
@@ -99,9 +96,9 @@ final class DictationManager {
             return
         }
         audioEngine.stop()
-        audioEngine.inputNode?.removeTap(onBus: nodeBus)
+        audioEngine.inputNode.removeTap(onBus: nodeBus)
         
-        try audioSession.setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options: [])
+        try audioSession.setCategory(.playback, mode: .default, options: [])
 
         recognitionTask?.cancel()
         recognitionTask = nil
