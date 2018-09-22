@@ -41,7 +41,7 @@ public final class AX: NSObject {
 
     private var userForceEnabledFeatures: Set<AX.Feature> = [] {
         didSet {
-            storage.set(value: userForceEnabledFeatures, for: .defaultsForcedFeatures)
+            storage.set(value: Array(userForceEnabledFeatures), for: .defaultsForcedFeatures)
         }
     }
 
@@ -56,7 +56,8 @@ public final class AX: NSObject {
         Feature.allCases.forEach { observe(feature: $0) }
 
         // Check for stored user-forced features
-        userForceEnabledFeatures = storage.value(for: .defaultsForcedFeatures) ?? []
+        let forcedFeatures: [Feature] = storage.value(for: .defaultsForcedFeatures) ?? []
+        userForceEnabledFeatures = Set(forcedFeatures)
     }
 
     deinit {
