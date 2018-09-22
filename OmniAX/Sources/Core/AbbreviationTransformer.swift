@@ -56,10 +56,8 @@ public struct Transformer: AbbrevationTransformer {
         }
 
         // Perform general transforms
-        generalTransforms.forEach({ transform in
-            correctedString = transform(correctedString)
-        })
-
-        return correctedString
+        return generalTransforms.reduce(correctedString) { result, transform in
+            return transform(result)
+        }
     }
 }

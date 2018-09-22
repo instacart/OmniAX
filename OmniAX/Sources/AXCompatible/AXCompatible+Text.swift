@@ -34,9 +34,8 @@ public extension AXType where Root: UITextView {
     /// Sets a custom inputAccessoryView for the root UITextView
     /// Important to have values for the following Cocoa Keys in your app's Info.plist
     /// NSSpeechRecognitionUsageDescription and NSMicrophoneUsageDescription
-    ///
     @discardableResult
-    /*public */func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> ManagedReference? {
+    public func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> ManagedReference? {
         guard let (view, reference) = dictationView(parent: parent, delegate: delegate) else {
             return nil
         }
@@ -49,9 +48,8 @@ public extension AXType where Root: UITextField {
     /// Sets a custom inputAccessoryView for the root UITextField
     /// Important to have values for the following Cocoa Keys in your app's Info.plist
     /// NSSpeechRecognitionUsageDescription and NSMicrophoneUsageDescription
-    ///
     @discardableResult
-    /*public */func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> ManagedReference? {
+    public func dictationInputAccessoryView<T: DictationDelegate>(parent: UIViewController?, delegate: T?) -> ManagedReference? {
         guard let (view, reference) = dictationView(parent: parent, delegate: delegate) else {
             return nil
         }

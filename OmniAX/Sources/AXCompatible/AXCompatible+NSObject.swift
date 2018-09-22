@@ -23,10 +23,19 @@ extension AXType where Root: NSObject {
             root.accessibilityCustomActions = newValue
         }
     }
-    
-    public func summarizeInSelf(elements: [NSObject?], inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
+
+    /// Summarize the accessibilityLabels from sub-elements into self as parent element
+    /// Useful for combining subviews into a more digestible accessibilty element
+    /// If summary accessibility text is not blank, sets elements isAccessibilityElement = true
+    ///
+    /// - Parameters:
+    ///   - children: Elements to summarize
+    ///   - inheritTraits: Inherits the subElements' traits by default
+    ///   - excludeHidden: Hidden UIView elements are excluded from summary by default
+    ///   - frame: If non-nil, the accessibilyFrame of the parent element is set to this value. Will need to handle scrolling manually
+    public func summarize(children: [NSObject?], inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
         AX.summarize(
-            elements: elements,
+            elements: children,
             in: root,
             inheritTraits: inheritTraits,
             excludeHidden: excludeHidden,
@@ -41,5 +50,16 @@ extension AXType where Root: NSObject {
             for: root,
             forceAccessible: forceAccessible
         )
+    }
+
+    // MARK: - Notifications/Announcements
+
+    /// Post an accessibility notification, focusing on (or announcing) self (root)
+    public func post(notification: UIAccessibility.Notification) {
+        guard !notification.isVoiceOverSpecific || AX.voiceOverEnabled else {
+            return
+        }
+
+        UIAccessibility.post(notification: notification, argument: root)
     }
 }
