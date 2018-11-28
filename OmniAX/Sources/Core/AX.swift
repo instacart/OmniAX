@@ -203,7 +203,7 @@ public final class AX: NSObject {
 
     /// Post an accessibility notification, focusing on/announcing the included focus item
     public static func post(notification: UIAccessibility.Notification, focus: Any?) {
-        guard !notification.isVoiceOverSpecific || voiceOverEnabled else {
+        guard !notification.isVoiceOverSpecific else {
             return
         }
 
@@ -289,9 +289,6 @@ public final class AX: NSObject {
 
     /// Bool inidicating if the element the focused accessibilityElement
     public static func isFocused(element: NSObject?) -> Bool {
-        guard voiceOverEnabled else {
-            return false
-        }
         guard let element = element else {
             return false
         }
