@@ -210,7 +210,7 @@ public final class AX: NSObject {
     }
 
     /// Convenience: Post an accessibility announcement notification, reading the included preset message
-    public static func announce(message: AXMessage) {
+    public static func announce(message: Message) {
         announce(message: message.rawValue)
     }
 
