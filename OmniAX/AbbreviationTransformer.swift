@@ -46,7 +46,7 @@ public struct Transformer: AbbrevationTransformer {
     /// Uses regular expression to replace occurrences of known abbrevations into their corresponding full words
     /// Iterates through and performs all generalTransform functions passed in AX configuration
     public func unabbreviate(string: String?) -> String? {
-        guard AX.voiceOverEnabled, var correctedString = string else {
+        guard var correctedString = string else {
             return string
         }
 
