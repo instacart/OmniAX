@@ -203,10 +203,6 @@ public final class AX: NSObject {
 
     /// Post an accessibility notification, focusing on/announcing the included focus item
     public static func post(notification: UIAccessibility.Notification, focus: Any?) {
-        guard !notification.isVoiceOverSpecific else {
-            return
-        }
-
         UIAccessibility.post(notification: notification, argument: focus)
     }
 
