@@ -237,9 +237,6 @@ public final class AX: NSObject {
     ///   - excludeHidden: Hidden UIView elements are excluded from summary by default
     ///   - frame: If non-nil, the accessibilyFrame of the parent element is set to this value. Will need to handle scrolling manually
     public static func summarize(elements: [NSObject?], in element: NSObject?, inheritTraits: Bool = true, excludeHidden: Bool = true, frame: CGRect? = nil) {
-        guard voiceOverEnabled else {
-            return
-        }
         guard let element = element else {
             return
         }
