@@ -147,12 +147,12 @@ public final class AX: NSObject {
         }
 
         if traits == .none {
-            element.accessibilityTraits = traits.rawValue
+            element.accessibilityTraits = UIAccessibilityTraits(rawValue: traits.rawValue)
         } else {
             if enabled {
-                element.accessibilityTraits |= traits.rawValue
+                element.accessibilityTraits.insert(UIAccessibilityTraits(rawValue: traits.rawValue))
             } else {
-                element.accessibilityTraits &= ~traits.rawValue
+                element.accessibilityTraits.remove(UIAccessibilityTraits(rawValue: traits.rawValue))
             }
         }
 
@@ -197,7 +197,7 @@ public final class AX: NSObject {
             return
         }
 
-        UIAccessibilityPostNotification(notification.mappedValue, focus)
+        UIAccessibility.post(notification: notification.mappedValue, argument: focus)
     }
 
     /// Convenience: Post an accessibility announcement notification, reading the included message
@@ -231,7 +231,7 @@ public final class AX: NSObject {
         }
 
         let accessibilityText = elements
-            .flatMap({
+            .compactMap({
                 $0?.isAccessibilityElement = ($0 === element)
                 if excludeHidden, let view = $0 as? UIView {
                     return view.isHidden ? nil : view.accessibilityLabel
@@ -252,13 +252,13 @@ public final class AX: NSObject {
 
         if inheritTraits {
             elements
-                .flatMap({
+                .compactMap({
                     guard excludeHidden, let view = $0 as? UIView else {
                         return $0?.accessibilityTraits
                     }
                     return view.isHidden ? nil : view.accessibilityTraits
                 })
-                .forEach({ element.accessibilityTraits |= $0 })
+                .forEach({ element.accessibilityTraits.insert($0) })
         }
     }
 

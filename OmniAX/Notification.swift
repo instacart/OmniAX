@@ -14,20 +14,20 @@ public enum Notification {
     case resumeAssistance
     case screenChanged
 
-    var mappedValue: UIAccessibilityNotifications {
+    var mappedValue: UIAccessibility.Notification {
         switch self {
         case .announcement:
-            return UIAccessibilityAnnouncementNotification
+            return UIAccessibility.Notification.announcement
         case .layoutChanged:
-            return UIAccessibilityLayoutChangedNotification
+            return UIAccessibility.Notification.layoutChanged
         case .pageScrolled:
-            return UIAccessibilityPageScrolledNotification
+            return UIAccessibility.Notification.pageScrolled
         case .pauseAssistance:
-            return UIAccessibilityPauseAssistiveTechnologyNotification
+            return UIAccessibility.Notification.pauseAssistiveTechnology
         case .resumeAssistance:
-            return UIAccessibilityResumeAssistiveTechnologyNotification
+            return UIAccessibility.Notification.resumeAssistiveTechnology
         case .screenChanged:
-            return UIAccessibilityScreenChangedNotification
+            return UIAccessibility.Notification.screenChanged
         }
     }
 
